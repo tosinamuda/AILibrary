@@ -28,7 +28,8 @@ public class Edge
         
     }
     
-    public Edge() {
+    public Edge() 
+    {
         this(null,null,2);
     }
     
