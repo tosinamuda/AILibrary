@@ -18,15 +18,18 @@ public class Edge
 {
     private Node _v1;
     private Node _v2;
-    private double _weight;
-    
-    
+    private double _weight;            
     
     public Edge(Node v1 , Node v2, double weight)
     {
         this._v1 = v1;
         this._v2 = v2;
         this._weight = weight;
+        
     }
+    
+    public Edge() {}
+    
+    
     
 }
