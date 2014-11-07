@@ -10,21 +10,32 @@ package Model.graphapi;
  *
  * @author Tosin AMUDA
  */
-class WeightedEdge extends Edge implements Comparable<Object>
+class WeightedEdge implements Comparable<Object>
 {
-
+    public final int v1, v2;
     public final double weight;
     
     public WeightedEdge(int v1, int v2, double weight)
     {
-        super(v1, v2);
-        
+        this.v1 = v1;
+        this.v2 = v2;
         this.weight = weight;
     }
     
   
      
-   
+    public int thisVertex()
+    {
+        return this.v1;
+    }
+    
+    public int otherVertex(int vertex)
+    {
+        if (vertex == v1)
+            return this.v2;
+        else    
+            return this.v1;
+    }
 
     public double getWeight()
     {

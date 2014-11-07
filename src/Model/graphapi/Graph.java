@@ -15,7 +15,7 @@ public class Graph
 
     private final int NoOfVertices;
     private int NoOfEdges;
-    private final List<Edge>[] AdjacencyList; //Adjancy list is an array of list
+    private final List<Edge> [] AdjacencyList;
 
     
     //Initialize this Graph Object
@@ -50,8 +50,8 @@ public class Graph
         {
             int v1 = reader.readInt();
             int v2 = reader.readInt();
-           
-            Edge e = new Edge(v1, v2);
+            double weight = reader.readDouble();
+            Edge e = new Edge(v1, v2, weight);
             AddEdge(e);
         }
 
@@ -75,17 +75,6 @@ public class Graph
         return AdjacencyList[v];
     }
 
-      //Get Adjacent Vertices to V
-    public Iterable<Integer> getAdjacentVerticies(int v) {
-       List<Integer> adjacentVertexList = new ArrayList<Integer>();
-       
-       for (Edge e : getIncidentList(v)) {
-           adjacentVertexList.add(e.otherVertex(v));
-           
-       }
-       
-        return adjacentVertexList;
-    }
      /* @return in-degree of a vertex in the edge-weighted graph .
      */
     public int getDegree(int v) 

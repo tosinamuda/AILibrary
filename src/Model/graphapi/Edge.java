@@ -10,26 +10,29 @@ package Model.graphapi;
  *
  * @author Tosin AMUDA
  */
-class Edge 
+public class Edge implements Comparable<Object>
 {
     public final int v1, v2;
-
+    public final double weight;
     
-    
-    public Edge(int v1, int v2)
+    public Edge(int v1, int v2, double weight)
     {
         this.v1 = v1;
         this.v2 = v2;
-        
+        this.weight = weight;
     }
     
   
-     
+    /**
+     * This method returns the start node of an edge
+     */
     public int thisVertex()
     {
         return this.v1;
     }
-    
+    /**
+     * 
+     */
     public int otherVertex(int vertex)
     {
         if (vertex == v1)
@@ -38,7 +41,10 @@ class Edge
             return this.v1;
     }
 
-  
+    public double getWeight()
+    {
+        return this.weight;
+    }
     
     
     @Override
@@ -48,5 +54,16 @@ class Edge
     }
 
     
-   
+    @Override
+    public int compareTo(Object o) {
+        Edge e = (Edge)o;
+        if (this.weight > e.weight)
+            return 1;
+        else if (this.weight < e.weight)
+            return -1;
+        else 
+            return 0;
+        
+        
+    }
 }
