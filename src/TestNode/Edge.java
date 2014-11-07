@@ -12,5 +12,6 @@ package TestNode;
  */
 public class Edge
 {
+    public Edge(){}
     
 }
