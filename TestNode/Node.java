@@ -87,6 +87,7 @@ public class Node implements Comparable<Object>
     
     
      
+    @Override
     public int compareTo(Object o) throws ArithmeticException {
         Node node = (Node)o;
         
