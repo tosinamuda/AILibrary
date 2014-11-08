@@ -33,9 +33,7 @@ public class Edge implements Comparable<Object>
         this._v1 = v1;
         this._v2 = v2;        
     }
-  
-    
-    
+          
       /**
      * This method returns the start node of an edge
      */
