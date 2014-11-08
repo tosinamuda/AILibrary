@@ -20,6 +20,7 @@ public class Node implements Comparable<Object>
     private Point _center;
     private String _label;
     private double _diameter;
+    private boolean _visited;
     
     /**
      * Constructors
@@ -61,6 +62,8 @@ public class Node implements Comparable<Object>
     {
         return this._label;        
     }
+    
+    
     public Point Center()
     {
         //return this._center;
@@ -108,4 +111,24 @@ public class Node implements Comparable<Object>
      protected void paintComponent(Graphics g) {
          drawCircle(g);
     }   
+
+    /**
+     * @return the _visited
+     */
+    public boolean isVisited()
+    {
+        return _visited;
+    }
+
+    /**
+     * @param _visited the _visited to set
+     */
+    public void setVisited(boolean _visited)
+    {
+        this._visited = _visited;
+    }
+
+    /**
+     * @return the _visited
+     */    
 }

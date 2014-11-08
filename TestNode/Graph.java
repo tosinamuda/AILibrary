@@ -18,7 +18,7 @@ public class Graph
     java.util.List<Edge> ListofEdges = new ArrayList<Edge>();
     
     
-    private final  HashMap<Node,java.util.List<Node>> AdjacencyList2 = new HashMap<Node,java.util.List<Node>>();
+   public HashMap<Node,java.util.List<Node>> AdjacencyList2 = new HashMap<Node,java.util.List<Node>>();
     
     public Graph()
     {
@@ -168,16 +168,16 @@ public class Graph
         return graph;
     }
     
-    public static void main(String[] args)
-    {
-        Graph g = new Graph();
-        g.AddNode("1"); g.AddNode("2"); g.AddNode("3"); g.AddNode("4");
-        g.AddEdge(g.getNode("1"), g.getNode("2"));
-        g.AddEdge(g.getNode("1"), g.getNode("3"));
-        g.AddEdge(g.getNode("2"), g.getNode("4"));
-        g.AddEdge(g.getNode("3"), g.getNode("4"));
-        String graphString = g.toString();
-        System.out.println(graphString);
-    }
-    
+//    public static void main(String[] args)
+//    {
+//        Graph g = new Graph();
+//        g.AddNode("1"); g.AddNode("2"); g.AddNode("3"); g.AddNode("4");
+//        g.AddEdge(g.getNode("1"), g.getNode("2"));
+//        g.AddEdge(g.getNode("1"), g.getNode("3"));
+//        g.AddEdge(g.getNode("2"), g.getNode("4"));
+//        g.AddEdge(g.getNode("3"), g.getNode("4"));
+//        String graphString = g.toString();
+//        System.out.println(graphString);
+//    }
+//    
 }
