@@ -23,6 +23,9 @@ public class Node implements Comparable<Object>
     
     /**
      * Constructors
+     * @param label
+     * @param diameter
+     * @param location
      */
     public Node(String label, double diameter, Point location)
     {
@@ -41,10 +44,13 @@ public class Node implements Comparable<Object>
     public Node(String label)
     {
         this._label = label;
+        this._drawingLocation = new Point(0,0);
+        this._diameter = 20;
     }
     
     /**
      * Properties
+     * @return 
      */
     public double Diameter()
     {
@@ -61,6 +67,24 @@ public class Node implements Comparable<Object>
         //center equals (x+radius,y+radius) where x and y is the upper left corner of the rectangle for a circle
         return new Point((int)(this._drawingLocation.getX() + this._diameter / 2), (int)(this._drawingLocation.getY() + this._diameter / 2));
     }
+
+    public void setCenter(Point center) {
+        this._center = center;
+    }
+
+    public void setDrawingLocation(Point _drawingLocation) {
+        this._drawingLocation = _drawingLocation;
+    }
+
+    public void setLabel(String _label) {
+        this._label = _label;
+    }
+
+    public void setDiameter(double _diameter) {
+        this._diameter = _diameter;
+    }
+    
+    
     
      
     public int compareTo(Object o) throws ArithmeticException {
