@@ -16,10 +16,9 @@ import java.util.*;
 public class Graph 
 {
     java.util.List<Edge> ListofEdges = new ArrayList<Edge>();
-    private HashMap AdjacencyList = new HashMap();
     
-    //private HashMap<String,java.util.List<Node>> AdjacencyList2 = new HashMap<String,java.util.List<Node>>();
-    private HashMap<Node,java.util.List<Node>> AdjacencyList2 = new HashMap<Node,java.util.List<Node>>();
+    
+    private final  HashMap<Node,java.util.List<Node>> AdjacencyList2 = new HashMap<Node,java.util.List<Node>>();
     
     public Graph()
     {
