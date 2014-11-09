@@ -21,7 +21,6 @@ public class Node implements Comparable<Object>
     private String _label;
     private double _diameter;
     private boolean _visited;
-    
     /**
      * Constructors
      * @param label
