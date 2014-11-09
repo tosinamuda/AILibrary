@@ -1,31 +1,37 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.UninformedSearch;
+package Model.Search;
 
-/**
- *
- * @author Tosin Amuda
- */
-import TestNode.*;
-import java.util.AbstractQueue;
+import TestNode.Graph;
+import TestNode.Node;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
-public class BreadthFirstSearch 
-{
-    public Graph g;
-   
+
+/**
+ *
+ * @author tosinamuda
+ */
+public class BreadthFirstSearch  extends UninformedSearch{
+
     public BreadthFirstSearch(Graph g)
     {
-        this.g = g;
+        super(g);
+      
+        
+    }
+    @Override
+    public List<Node> Search() {
+        return null;
+        
     }
     
-    public List<Node> BFS( Node start, Node goal)
+    @Override
+    public List<Node> Search( Node start, Node goal)
     {
         Node currentNode = start;
         Queue<Node> searchQueue = new LinkedList<Node>();
@@ -56,15 +62,10 @@ public class BreadthFirstSearch
         }  
         return VisitedNodeList;
     }
-    public static void main(String[] args) 
-    {     
-        Graph g = new Graph();
-        g.AddNode("1"); g.AddNode("2"); g.AddNode("3"); g.AddNode("4");
-        g.AddEdge(g.getNode("1"), g.getNode("2"));
-        g.AddEdge(g.getNode("1"), g.getNode("3"));
-        g.AddEdge(g.getNode("2"), g.getNode("4"));
-        g.AddEdge(g.getNode("3"), g.getNode("4"));   
-        BreadthFirstSearch bfs = new BreadthFirstSearch(g);
-        List<Node> lst = bfs.BFS( g.getNode("1"), g.getNode("4")) ; 
+
+    @Override
+    public List<Node> Search(Node start) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

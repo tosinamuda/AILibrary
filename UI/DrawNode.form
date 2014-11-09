@@ -81,7 +81,7 @@
             <StringItem index="0" value="Add Edge"/>
             <StringItem index="1" value="Delete Edge"/>
             <StringItem index="2" value="Delete Node"/>
-            <StringItem index="3" value=" "/>
+            <StringItem index="3" value="Select Start and Goal Node"/>
           </StringArray>
         </Property>
       </Properties>

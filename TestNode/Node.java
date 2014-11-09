@@ -103,11 +103,25 @@ public class Node implements Comparable<Object>
        
      public void drawCircle(Graphics g)
      {
-         g.setColor(Color.black);
-         int diameter = (int)this._diameter;
+         
+          int diameter = (int)this._diameter;
+         if(this.isVisited()){
+            g.setColor(Color.green);
+            g.fillOval((int)this._drawingLocation.getX(), (int)this._drawingLocation.getY(), diameter, diameter);
+            g.setColor(Color.red);
+            g.drawString(this._label, (int)this.Center().getX() - 5, (int)this.Center().getY()+ 5);
+         }
+         
+         else
+         {
+             
+          g.setColor(Color.black);
         g.fillOval((int)this._drawingLocation.getX(), (int)this._drawingLocation.getY(), diameter, diameter);
        g.setColor(Color.red);
         g.drawString(this._label, (int)this.Center().getX() - 5, (int)this.Center().getY()+ 5);
+             
+         }
+         
         
      }   
     
