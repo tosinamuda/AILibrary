@@ -95,5 +95,16 @@ public class DepthLimitedSearch
         return VisitedNodeList;
             
     }
+    public static void main(String[] args) 
+    {     
+        Graph g = new Graph();
+        g.AddNode("1"); g.AddNode("2"); g.AddNode("3"); g.AddNode("4");
+        g.AddEdge(g.getNode("1"), g.getNode("2"));
+        g.AddEdge(g.getNode("1"), g.getNode("3"));
+        g.AddEdge(g.getNode("2"), g.getNode("4"));
+        g.AddEdge(g.getNode("3"), g.getNode("4"));   
+        DepthLimitedSearch bfs = new DepthLimitedSearch();
+        List<Node> lst = bfs.DLS(g, g.getNode("1"), g.getNode("4"), 1) ; 
+    }
     
 }
