@@ -209,7 +209,7 @@ public class DrawNode extends javax.swing.JPanel {
 
             else if(selectedIndex == 3)  {
              //TO-DO     do edge and node delete function
-                Search search = new Model.Search.DepthFirstSearch(this.graph);
+                Search search = new Model.Search.BreadthFirstSearch(this.graph);
            task = new Task(this.graph, this, node1, search);
            task.execute();
            

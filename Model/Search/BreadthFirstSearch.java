@@ -41,7 +41,7 @@ public class BreadthFirstSearch  extends UninformedSearch{
         while(!searchQueue.isEmpty())
         {
             currentNode = searchQueue.remove();
-            currentNode.setVisited(true);
+            //currentNode.setVisited(true);
             
             VisitedNodeList.add(currentNode);            
             if(currentNode == goal)
@@ -73,7 +73,7 @@ public class BreadthFirstSearch  extends UninformedSearch{
         while(!searchQueue.isEmpty())
         {
             currentNode = searchQueue.remove();
-            currentNode.setVisited(true);
+            //currentNode.setVisited(true);
             VisitedNodeList.add(currentNode);                        
             for(Node e : this.g.AdjacencyList2.get(currentNode))
             {
