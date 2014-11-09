@@ -11,6 +11,5 @@ package Model.InformedSearch;
  */
 public class HillClimbing 
 {
-    
-    
+        
 }
