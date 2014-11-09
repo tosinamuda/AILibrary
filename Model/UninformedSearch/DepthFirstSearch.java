@@ -15,90 +15,12 @@ import TestNode.*;
 import java.util.*;
 import static java.lang.System.*;
 public class DepthFirstSearch
-{             
-    public DepthFirstSearch()
+{       
+    public Graph _g;
+    public DepthFirstSearch( Graph g)
     {
-    
-    }
-    /**
-     * This method represents the Depth First Search algorithm of a graph
-     * @param g is a graph object which must not be null
-     * @param start is an integer value that represents on of the nodes in the graph g
-     */
-//    public void DFS(Graph g, int start)
-//    {                          
-//        //Initialize Stack
-//        int node;
-//        Stack<Integer> myStack = new Stack<Integer>(); 
-//        List<Integer> visited = new ArrayList<Integer>();
-//        myStack.push(start);
-//        while(!(myStack.isEmpty()))
-//        {
-//            node = myStack.pop();
-//            visited.add(node);
-//            for(Edge e: g.getIncidentList(node))
-//            {
-//                boolean check = visited.contains(e.otherVertex(node));
-//                boolean checker = myStack.contains(e.otherVertex(node));                
-//                if ((!(check)) && (!(checker)))
-//                {
-//                    myStack.push(e.otherVertex(node));
-//                }
-//            }
-//        }
-//        
-//        for(int a: visited)
-//        {
-//            System.out.print(a + "\t");
-//        }
-//    }
-    
-    
-//    public void DFS(Graph g, int start, int goal)
-//    {
-//        int currentNode;
-//        //Initialize Stack
-//        Stack<Integer> searchStack = new Stack<Integer>();
-//        //Create a list to store nodes that have already been visited
-//        List<Integer> VisitedNodeList = new ArrayList<Integer>();
-//        
-//        //Push start node unto the stack
-//        searchStack.push(start);
-//        
-//        //Start Search
-//        while( !(searchStack.empty()))
-//        {
-//            currentNode = searchStack.pop();
-//            VisitedNodeList.add(currentNode);
-//            
-//            //if the current node is the goal node
-//            //Stop the search
-//            if(currentNode == goal)
-//            {
-//                break;
-//            }
-//            /**
-//             * Get the neighbours of the popped node 
-//             * if they have not been visited and they are not on the stack         
-//             * Add push them to the stack             
-//            **/
-//            for(Edge e : g.getIncidentList(currentNode))                
-//            {
-//                if(!(VisitedNodeList.contains(e.otherVertex(currentNode))) && !(searchStack.contains(e.otherVertex(currentNode))))
-//                {
-//                    searchStack.push(e.otherVertex(currentNode));
-//                    
-//                }                
-//            }                                    
-//        }
-//        for(int item : VisitedNodeList)
-//        {
-//            out.print(item + "\t");            
-//        }
-//        
-//        
-//    }
-    
+        this._g = g;    
+    }       
     /**
      * This method represents the Depth First Search algorithm of a graph
      * @param g is a graph object which must not be null
@@ -106,9 +28,46 @@ public class DepthFirstSearch
      * @param goal
      */
         
-    public void DFSwithNode(Graph g, Node start, Node goal )
+    public List<Node> DFS(Node start)
     {
-        Node currentNode;         
+        Node currentNode = start;         
+        //Initialize Stack
+        Stack<Node> searchStack = new Stack<>();
+        //Create a list to store nodes that have already been visited
+        List<Node> VisitedNodeList = new ArrayList<Node>();
+        
+        //Push start node unto the stack
+        searchStack.push(currentNode);
+        
+        //Start Search
+        while( !(searchStack.empty()))
+        {
+            currentNode = searchStack.pop();
+            currentNode.setVisited(true);
+            VisitedNodeList.add(currentNode);                                    
+            /**
+             * Get the neighbours of the popped node 
+             * if they have not been visited and they are not on the stack         
+             * Add push them to the stack             
+            **/
+            for(Node e : this._g.AdjacencyList2.get(currentNode))
+            {
+                if(!(VisitedNodeList.contains(e) && !(searchStack.contains(e))))
+                {
+                    searchStack.push(e);                    
+                }                
+            }                                   
+        }
+        for(Node item : VisitedNodeList)
+        {
+            out.print(item.Label() + "\t");            
+        }
+        return VisitedNodeList;
+    }
+    
+    public List<Node> DFS( Node start, Node goal )
+    {
+        Node currentNode = start;         
         //Initialize Stack
         Stack<Node> searchStack = new Stack<>();
         //Create a list to store nodes that have already been visited
@@ -121,6 +80,7 @@ public class DepthFirstSearch
         while( !(searchStack.empty()))
         {
             currentNode = searchStack.pop();
+            currentNode.setVisited(true);
             VisitedNodeList.add(currentNode);
             
             //if the current node is the goal node
@@ -134,7 +94,7 @@ public class DepthFirstSearch
              * if they have not been visited and they are not on the stack         
              * Add push them to the stack             
             **/
-            for(Node e : g.AdjacencyList2.get(currentNode))
+            for(Node e : this._g.AdjacencyList2.get(currentNode))
             {
                 if(!(VisitedNodeList.contains(e) && !(searchStack.contains(e))))
                 {
@@ -146,5 +106,18 @@ public class DepthFirstSearch
         {
             out.print(item.Label() + "\t");            
         }
+        return VisitedNodeList;
+    }
+    
+    public static void main(String[] args) 
+    {     
+        Graph g = new Graph();
+        g.AddNode("1"); g.AddNode("2"); g.AddNode("3"); g.AddNode("4");
+        g.AddEdge(g.getNode("1"), g.getNode("2"));
+        g.AddEdge(g.getNode("1"), g.getNode("3"));
+        g.AddEdge(g.getNode("2"), g.getNode("4"));
+        g.AddEdge(g.getNode("3"), g.getNode("4"));   
+        DepthFirstSearch bfs = new DepthFirstSearch(g);
+        List<Node> lst = bfs.DFS(g.getNode("1"), g.getNode("4")) ; 
     }
 }

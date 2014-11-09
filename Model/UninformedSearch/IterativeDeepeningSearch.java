@@ -16,57 +16,16 @@ import static java.lang.System.out;
 import java.util.*;
 public class IterativeDeepeningSearch
 {        
-    
-    public IterativeDeepeningSearch()
+    public Graph _g;
+    public IterativeDeepeningSearch(Graph g)
     {
+        this._g = g;
         
-    }
+    }    
     
-//    private int DLS(Graph g, int start, int goal, int limit)
-//    {
-//        int currentNode;
-//        int depth;
-//        int result = 0;
-//        Stack<Integer> searchStack = new Stack<Integer>();
-//        Stack<Integer> depthStack = new Stack<Integer>();
-//        List<Integer> VisitedNodeList = new ArrayList<Integer>();
-//        searchStack.push(start);
-//        depthStack.push(0);
-//        out.println();
-//        while(!(searchStack.empty()))
-//        {
-//            currentNode = searchStack.pop();
-//            VisitedNodeList.add(currentNode);
-//            depth = depthStack.pop();
-//            
-//            out.println("Depth\t" + depth + "\tNode\t" + currentNode );
-//            if(currentNode == goal)            
-//            {
-//                result = 1;
-//                break;
-//            }
-//            if(depth < limit)
-//            {
-//                for(Edge e  : g.getIncidentList(currentNode))
-//                {
-//                    if(!(VisitedNodeList.contains(e.otherVertex(currentNode))) && !(searchStack.contains(e.otherVertex(currentNode))))
-//                    {
-//                        searchStack.push(e.otherVertex(currentNode));
-//                        depthStack.push(depth+1);                        
-//                    }                                    
-//                }
-//            }            
-//        }                
-//        for(int item : VisitedNodeList)
-//        {
-//            out.print(item + "\t");            
-//        }                
-//        return result;
-//    }    
-    
-    public int DLSwithNode(TestNode.Graph g, Node start, Node goal, int limit)
+    public int DLS(Node start, Node goal, int limit)
     {
-        Node currentNode;
+        Node currentNode = start;
         int depth;
         int result = 0;
         Stack<Node> searchStack = new Stack<>();
@@ -78,6 +37,7 @@ public class IterativeDeepeningSearch
         {
             currentNode = searchStack.pop();
             VisitedNodeList.add(currentNode);
+            currentNode.setVisited(true);
             depth = depthStack.pop();            
             out.println("Depth\t" + depth + "\tNode\t" + currentNode.Label());
             if(currentNode == goal)            
@@ -87,7 +47,7 @@ public class IterativeDeepeningSearch
             }
             if(depth < limit)
             {
-                for(Node e  : g.AdjacencyList2.get(currentNode))
+                for(Node e  : this._g.AdjacencyList2.get(currentNode))
                 {
                     if(!(VisitedNodeList.contains(e)) && !(searchStack.contains(e)))
                     {
@@ -105,14 +65,14 @@ public class IterativeDeepeningSearch
         return result;
     }
     
-    public void IDS(Graph g, Node start,Node goal)
+    public void IDS(Node start,Node goal)
     {
         int status;
         int depth;
         depth = 0;
         while(true)
         {
-            status = this.DLSwithNode(g, start, goal, depth);
+            status = this.DLS(start, goal, depth);
             if(status == 1) 
                 break;
             else
