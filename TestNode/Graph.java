@@ -37,6 +37,11 @@ public class Graph
         AdjacencyList2.put(n, new ArrayList<Node>());        
     }
     
+    public void AddNode(Node newNode)
+    {
+        AdjacencyList2.put(newNode,  new ArrayList<Node>());
+    }
+    
 //    public void AddEdge(String to, String from)
 //    {
 //        Node v1 = new Node(to);
