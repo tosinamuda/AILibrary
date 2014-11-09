@@ -63,9 +63,32 @@ public class BreadthFirstSearch  extends UninformedSearch{
         return VisitedNodeList;
     }
 
-    @Override
-    public List<Node> Search(Node start) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Node> Search( Node start)
+    {
+        Node currentNode = start;
+        Queue<Node> searchQueue = new LinkedList<Node>();
+        List<Node> VisitedNodeList = new ArrayList<Node>();
+        
+        searchQueue.add(start);
+        while(!searchQueue.isEmpty())
+        {
+            currentNode = searchQueue.remove();
+            currentNode.setVisited(true);
+            VisitedNodeList.add(currentNode);                        
+            for(Node e : this.g.AdjacencyList2.get(currentNode))
+            {
+                if(!(VisitedNodeList.contains(e) && !(searchQueue.contains(e))))
+                {
+                    searchQueue.add(e);                    
+                }                
+            }                                 
+        }
+        for(Node e: VisitedNodeList)
+        {
+            System.out.print(e.Label()+"\t");
+        }  
+        return VisitedNodeList;
     }
-    
+
+  
 }
