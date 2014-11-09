@@ -33,7 +33,7 @@ public class TowersOH
         }
      }
      
-    public static class Node implements Cloneable
+    private static class Node implements Cloneable
     {
         public Stack[] v;
         public Node parent;
