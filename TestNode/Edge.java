@@ -19,7 +19,8 @@ public class Edge implements Comparable<Object>
 {
     private Node _v1;
     private Node _v2;
-    private double _weight;            
+    public double _weight; 
+    public Edge parent =null;
     
     public Edge(Node v1 , Node v2, double weight)
     {
@@ -70,8 +71,6 @@ public class Edge implements Comparable<Object>
         
         
     }
-     
-     
      
  
     protected void paintComponent(Graphics g) {

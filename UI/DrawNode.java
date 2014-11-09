@@ -5,16 +5,22 @@
  */
 package UI;
 
+import Model.Search.Search;
+import Model.UninformedSearch.DepthFirstSearch;
 import TestNode.Edge;
 import TestNode.Graph;
 import TestNode.Node;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -61,7 +67,7 @@ public class DrawNode extends javax.swing.JPanel {
 
         jLabelNodeA.setText("Node 1");
 
-        jComboBoxSelectNodeEdgeAction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Add Edge", "Delete Edge", "Delete Node", " " }));
+        jComboBoxSelectNodeEdgeAction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Add Edge", "Delete Edge", "Delete Node", "Select Start and Goal Node" }));
         jComboBoxSelectNodeEdgeAction.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxSelectNodeEdgeActionItemStateChanged(evt);
@@ -130,8 +136,18 @@ public class DrawNode extends javax.swing.JPanel {
            jLabelNodeB.setVisible(false);
            jTextFieldNodeB.setVisible(false);
        }
-       else
+       
+       else if(index == 3)
        {
+           jLabelNodeA.setText("Start Node");
+           
+           jLabelNodeB.setVisible(false);
+           jTextFieldNodeB.setVisible(false);
+       }
+       else 
+       {
+           jLabelNodeA.setText("Node 1");
+           jLabelNodeB.setText("Node 2");
            jLabelNodeB.setVisible(true);
            jTextFieldNodeB.setVisible(true);
        }
@@ -156,7 +172,7 @@ public class DrawNode extends javax.swing.JPanel {
         
         Node node1  = findNode(node1Value);
        
-        if(selectedIndex  == 0 || selectedIndex == 1){
+        if(selectedIndex  == 0 || selectedIndex == 1 ){
             String node2Value = jTextFieldNodeB.getText();
              Node node2  = findNode(node2Value);
             if (node1 == null || node2 == null)
@@ -179,21 +195,24 @@ public class DrawNode extends javax.swing.JPanel {
             graph.AddEdge(node1, node2);
             repaint();
             }
+            
+            
         }
         
         //Option for deleteNode
-        else if (selectedIndex  == 2){
+        else if (selectedIndex  == 2 || selectedIndex == 3){
             if (node1 == null )
             {
                 JOptionPane.showMessageDialog(this, "The Node entered  does not exist...Please Enter The Right Node");
 
             }
 
-            else {
-                //TO-DO delete node and edge
-//            edges.add(new Edge(node1, node2));
-//            graph.AddEdge(node1, node2);
-//            repaint();
+            else if(selectedIndex == 3)  {
+             //TO-DO     do edge and node delete function
+                Search search = new Model.Search.DepthFirstSearch(this.graph);
+           task = new Task(this.graph, this, node1, search);
+           task.execute();
+           
             }
               
         }
@@ -248,6 +267,49 @@ public class DrawNode extends javax.swing.JPanel {
         frame.setVisible(true);
         frame.pack();
     }
+    
+    class Task extends SwingWorker<Void, Node> 
+    {
+        public Graph g;
+        public DrawNode drawNode;
+        public Node startNode;
+        public Search search;
+        
+        Task(Graph g, DrawNode drawNode, Node startNode, Search search)
+        {
+        
+        this.g = g;
+        this.drawNode =  drawNode;
+        this.startNode = startNode;
+        this.search = search;
+        
+                  
+            
+        }
+
+        @Override
+        protected Void doInBackground() throws InterruptedException{
+            
+        
+        
+        List<Node> lst = search.Search(startNode) ; 
+        Iterator  iterator = lst.iterator();
+        for(int i=0; i < lst.size(); i++){
+           lst.get(i).setVisited(true);
+            Thread.sleep(1000);
+        publish(lst.get(i));
+        
+        }
+            return  null;
+        }
+    
+        @Override
+        protected void process(List<Node> nodes) {
+            drawNode.repaint();
+        }
+        
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNodeEdgeAction;
@@ -264,4 +326,5 @@ public class DrawNode extends javax.swing.JPanel {
     private List <Node> nodes;
     private List <Edge> edges;
     private Graph graph;
+     private Task task;
 }

@@ -161,6 +161,16 @@ public class Graph
      return n;
     }
     
+    public Edge getEdge(Node v1, Node v2)
+    {
+        for(Edge e: ListofEdges)
+        {
+            if (e.thisNode().equals(v1) && e.otherNode(v1).equals(v2))
+                return e;
+        }
+        return null;
+    }
+    
     @Override
     public String toString()
     {

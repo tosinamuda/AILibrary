@@ -43,7 +43,7 @@ public class DepthFirstSearch
         while( !(searchStack.empty()))
         {
             currentNode = searchStack.pop();
-            currentNode.setVisited(true);
+           // currentNode.setVisited(true);
             VisitedNodeList.add(currentNode);                                    
             /**
              * Get the neighbours of the popped node 
@@ -118,6 +118,6 @@ public class DepthFirstSearch
         g.AddEdge(g.getNode("2"), g.getNode("4"));
         g.AddEdge(g.getNode("3"), g.getNode("4"));   
         DepthFirstSearch bfs = new DepthFirstSearch(g);
-        List<Node> lst = bfs.DFS(g.getNode("1"), g.getNode("4")) ; 
+        List<Node> lst = bfs.DFS(g.getNode("1")) ; 
     }
 }

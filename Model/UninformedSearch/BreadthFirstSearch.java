@@ -36,6 +36,7 @@ public class BreadthFirstSearch
         {
             currentNode = searchQueue.remove();
             currentNode.setVisited(true);
+            
             VisitedNodeList.add(currentNode);            
             if(currentNode == goal)
             {
