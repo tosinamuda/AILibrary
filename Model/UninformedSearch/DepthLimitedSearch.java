@@ -16,14 +16,15 @@ import static java.lang.System.out;
 import java.util.*;
 public class DepthLimitedSearch
 {
-    public DepthLimitedSearch()
+    public Graph _g;
+    public DepthLimitedSearch(Graph g)
     {
-        
+       this._g = g; 
     }
     
-    public List<Node> DLS(Graph g, Node start, int Limit)
+    public List<Node> DLS(Node start, int Limit)
     {
-        Node currentNode;
+        Node currentNode = start;
         int depth;
         Stack<Node> searchStack = new Stack<>();
         Stack<Integer> depthStack = new Stack<Integer>();
@@ -39,7 +40,7 @@ public class DepthLimitedSearch
            
             if(depth < Limit)
             {
-                for(Node e  : g.AdjacencyList2.get(currentNode))
+                for(Node e  : this._g.AdjacencyList2.get(currentNode))
                 {
                     if(!(VisitedNodeList.contains(e)) && !(searchStack.contains(e)))
                     {
@@ -57,9 +58,9 @@ public class DepthLimitedSearch
         
     }
     
-    public List<Node> DLS(Graph g, Node start, Node goal, int limit)
+    public List<Node> DLS( Node start, Node goal, int limit)
     {
-        Node currentNode;
+        Node currentNode = start;
         int depth;
         Stack<Node> searchStack = new Stack<>();
         Stack<Integer> depthStack = new Stack<Integer>();
@@ -79,7 +80,7 @@ public class DepthLimitedSearch
             }
             if(depth < limit)
             {
-                for(Node e  : g.AdjacencyList2.get(currentNode))
+                for(Node e  : this._g.AdjacencyList2.get(currentNode))
                 {
                     if(!(VisitedNodeList.contains(e)) && !(searchStack.contains(e)))
                     {
@@ -104,8 +105,8 @@ public class DepthLimitedSearch
         g.AddEdge(g.getNode("1"), g.getNode("3"));
         g.AddEdge(g.getNode("2"), g.getNode("4"));
         g.AddEdge(g.getNode("3"), g.getNode("4"));   
-        DepthLimitedSearch bfs = new DepthLimitedSearch();
-        List<Node> lst = bfs.DLS(g, g.getNode("1"), g.getNode("4"), 1) ; 
+        DepthLimitedSearch bfs = new DepthLimitedSearch(g);
+        List<Node> lst = bfs.DLS( g.getNode("1"), g.getNode("4"), 1) ; 
     }
     
 }

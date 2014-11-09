@@ -15,10 +15,11 @@ import TestNode.*;
 import java.util.*;
 import static java.lang.System.*;
 public class DepthFirstSearch
-{             
-    public DepthFirstSearch()
+{       
+    public Graph _g;
+    public DepthFirstSearch( Graph g)
     {
-    
+        this._g = g;    
     }       
     /**
      * This method represents the Depth First Search algorithm of a graph
@@ -27,16 +28,16 @@ public class DepthFirstSearch
      * @param goal
      */
         
-    public List<Node> DFS(Graph g, Node start)
+    public List<Node> DFS(Node start)
     {
-        Node currentNode;         
+        Node currentNode = start;         
         //Initialize Stack
         Stack<Node> searchStack = new Stack<>();
         //Create a list to store nodes that have already been visited
         List<Node> VisitedNodeList = new ArrayList<Node>();
         
         //Push start node unto the stack
-        searchStack.push(start);
+        searchStack.push(currentNode);
         
         //Start Search
         while( !(searchStack.empty()))
@@ -49,7 +50,7 @@ public class DepthFirstSearch
              * if they have not been visited and they are not on the stack         
              * Add push them to the stack             
             **/
-            for(Node e : g.AdjacencyList2.get(currentNode))
+            for(Node e : this._g.AdjacencyList2.get(currentNode))
             {
                 if(!(VisitedNodeList.contains(e) && !(searchStack.contains(e))))
                 {
@@ -64,9 +65,9 @@ public class DepthFirstSearch
         return VisitedNodeList;
     }
     
-    public List<Node> DFS(Graph g, Node start, Node goal )
+    public List<Node> DFS( Node start, Node goal )
     {
-        Node currentNode;         
+        Node currentNode = start;         
         //Initialize Stack
         Stack<Node> searchStack = new Stack<>();
         //Create a list to store nodes that have already been visited
@@ -93,7 +94,7 @@ public class DepthFirstSearch
              * if they have not been visited and they are not on the stack         
              * Add push them to the stack             
             **/
-            for(Node e : g.AdjacencyList2.get(currentNode))
+            for(Node e : this._g.AdjacencyList2.get(currentNode))
             {
                 if(!(VisitedNodeList.contains(e) && !(searchStack.contains(e))))
                 {
@@ -116,7 +117,7 @@ public class DepthFirstSearch
         g.AddEdge(g.getNode("1"), g.getNode("3"));
         g.AddEdge(g.getNode("2"), g.getNode("4"));
         g.AddEdge(g.getNode("3"), g.getNode("4"));   
-        DepthFirstSearch bfs = new DepthFirstSearch();
-        List<Node> lst = bfs.DFS(g, g.getNode("1"), g.getNode("4")) ; 
+        DepthFirstSearch bfs = new DepthFirstSearch(g);
+        List<Node> lst = bfs.DFS(g.getNode("1"), g.getNode("4")) ; 
     }
 }

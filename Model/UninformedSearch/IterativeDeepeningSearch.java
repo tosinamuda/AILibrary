@@ -16,15 +16,16 @@ import static java.lang.System.out;
 import java.util.*;
 public class IterativeDeepeningSearch
 {        
-    
-    public IterativeDeepeningSearch()
+    public Graph _g;
+    public IterativeDeepeningSearch(Graph g)
     {
+        this._g = g;
         
     }    
     
-    public int DLS(TestNode.Graph g, Node start, Node goal, int limit)
+    public int DLS(Node start, Node goal, int limit)
     {
-        Node currentNode;
+        Node currentNode = start;
         int depth;
         int result = 0;
         Stack<Node> searchStack = new Stack<>();
@@ -46,7 +47,7 @@ public class IterativeDeepeningSearch
             }
             if(depth < limit)
             {
-                for(Node e  : g.AdjacencyList2.get(currentNode))
+                for(Node e  : this._g.AdjacencyList2.get(currentNode))
                 {
                     if(!(VisitedNodeList.contains(e)) && !(searchStack.contains(e)))
                     {
@@ -64,14 +65,14 @@ public class IterativeDeepeningSearch
         return result;
     }
     
-    public void IDS(Graph g, Node start,Node goal)
+    public void IDS(Node start,Node goal)
     {
         int status;
         int depth;
         depth = 0;
         while(true)
         {
-            status = this.DLS(g, start, goal, depth);
+            status = this.DLS(start, goal, depth);
             if(status == 1) 
                 break;
             else
