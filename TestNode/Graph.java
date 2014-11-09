@@ -15,10 +15,12 @@ import java.awt.*;
 import java.util.*;
 public class Graph 
 {
-    java.util.List<Edge> ListofEdges = new ArrayList<Edge>();
+    public final java.util.List<Edge> ListofEdges = new ArrayList<Edge>();
+    public final java.util.List<Node> ListofNodes = new ArrayList<Node>();
+    public static int countNode = 0;
+    public static int countEdge = 0;
     
-    
-   public HashMap<Node,java.util.List<Node>> AdjacencyList2 = new HashMap<Node,java.util.List<Node>>();
+   public final HashMap<Node,java.util.List<Node>> AdjacencyList2 = new HashMap<Node,java.util.List<Node>>();
     
     public Graph()
     {
@@ -33,12 +35,16 @@ public class Graph
     
     public void AddNode(String Label)
     {
+        countNode++;
         Node n = new Node(Label);
+        ListofNodes.add(n);
         AdjacencyList2.put(n, new ArrayList<Node>());        
     }
     
     public void AddNode(Node newNode)
     {
+        countNode++;
+        ListofNodes.add(newNode);
         AdjacencyList2.put(newNode,  new ArrayList<Node>());
     }
     
@@ -88,6 +94,7 @@ public class Graph
         {  
             AdjacencyList2.get(from).add(to);
             AdjacencyList2.get(to).add(from);
+            countEdge++;
             ListofEdges.add(e);                              
         }
         else
