@@ -36,6 +36,7 @@ public class IterativeDeepeningSearch
         {
             currentNode = searchStack.pop();
             VisitedNodeList.add(currentNode);
+            currentNode.setVisited(true);
             depth = depthStack.pop();            
             out.println("Depth\t" + depth + "\tNode\t" + currentNode.Label());
             if(currentNode == goal)            

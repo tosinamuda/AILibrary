@@ -34,8 +34,8 @@ public class BreadthFirstSearch
         while(!searchQueue.isEmpty())
         {
             currentNode = searchQueue.remove();
-            VisitedNodeList.add(currentNode);
-            System.out.println("\n "+ currentNode.Label()); 
+            currentNode.setVisited(true);
+            VisitedNodeList.add(currentNode);            
             if(currentNode == goal)
             {
                 break;

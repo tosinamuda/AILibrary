@@ -69,6 +69,7 @@ public class DepthLimitedSearch
         while(!(searchStack.empty()))
         {
             currentNode = searchStack.pop();
+            currentNode.setVisited(true);
             VisitedNodeList.add(currentNode);
             depth = depthStack.pop();            
             out.println("Depth\t" + depth + "\tNode\t" + currentNode.Label());

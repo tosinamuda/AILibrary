@@ -42,6 +42,7 @@ public class DepthFirstSearch
         while( !(searchStack.empty()))
         {
             currentNode = searchStack.pop();
+            currentNode.setVisited(true);
             VisitedNodeList.add(currentNode);                                    
             /**
              * Get the neighbours of the popped node 
@@ -78,6 +79,7 @@ public class DepthFirstSearch
         while( !(searchStack.empty()))
         {
             currentNode = searchStack.pop();
+            currentNode.setVisited(true);
             VisitedNodeList.add(currentNode);
             
             //if the current node is the goal node
