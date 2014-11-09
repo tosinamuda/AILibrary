@@ -141,10 +141,10 @@ public class DrawNode extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        countNode++;
-        Node newNode = new Node(String.valueOf(countNode), 20, evt.getPoint());
         
+        Node newNode = new Node(String.valueOf(Graph.countNode), 20, evt.getPoint());
         nodes.add( newNode);
+        graph.ListofNodes.add(newNode);
         graph.AddNode(newNode);
         repaint();
     }//GEN-LAST:event_formMouseClicked
@@ -167,18 +167,21 @@ public class DrawNode extends javax.swing.JPanel {
 
             else if(selectedIndex == 0)  {
 
-            edges.add(new Edge(node1, node2));
+           
+            graph.ListofEdges.add(new Edge(node1, node2));
             graph.AddEdge(node1, node2);
             repaint();
             }
               else if(selectedIndex == 1)  {
              //TO-DO     do edge and node delete function
-            edges.add(new Edge(node1, node2));
+           
+            graph.ListofEdges.add(new Edge(node1, node2));
             graph.AddEdge(node1, node2);
             repaint();
             }
         }
         
+        //Option for deleteNode
         else if (selectedIndex  == 2){
             if (node1 == null )
             {
@@ -199,7 +202,7 @@ public class DrawNode extends javax.swing.JPanel {
     private Node findNode(String nodeValue)
     {
         Node foundNode = null;
-        for(Node n: this.nodes) 
+        for(Node n: graph.ListofNodes) 
         {
             if (n.Label().equals(nodeValue) )
             {
@@ -219,16 +222,16 @@ public class DrawNode extends javax.swing.JPanel {
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        if (!nodes.isEmpty()){
-        for(Node n : nodes)
+        if (!graph.ListofNodes.isEmpty()){
+        for(Node n : graph.ListofNodes)
         {
             n.drawCircle(g);
             
         }
         }
         
-        if (!edges.isEmpty()){
-        for (Edge e : edges)
+        if (!graph.ListofEdges.isEmpty()){
+        for (Edge e : graph.ListofEdges)
         {
             e.drawEdge(g);
         }                    
@@ -260,7 +263,5 @@ public class DrawNode extends javax.swing.JPanel {
     private Node nodeB;
     private List <Node> nodes;
     private List <Edge> edges;
-    private static int countNode = 0;
-    private static int countEdge = 0;
     private Graph graph;
 }
