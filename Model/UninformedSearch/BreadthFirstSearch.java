@@ -52,15 +52,45 @@ public class BreadthFirstSearch
         }
         for(Node e: VisitedNodeList)
         {
-            System.out.println(e.Label()+"\t");
+            System.out.print(e.Label()+"\t");
+        }  
+        return VisitedNodeList;
+    }
+    
+    public List<Node> BFS( Node start)
+    {
+        Node currentNode = start;
+        Queue<Node> searchQueue = new LinkedList<Node>();
+        List<Node> VisitedNodeList = new ArrayList<Node>();
+        
+        searchQueue.add(start);
+        while(!searchQueue.isEmpty())
+        {
+            currentNode = searchQueue.remove();
+            currentNode.setVisited(true);
+            VisitedNodeList.add(currentNode);                        
+            for(Node e : this.g.AdjacencyList2.get(currentNode))
+            {
+                if(!(VisitedNodeList.contains(e) && !(searchQueue.contains(e))))
+                {
+                    searchQueue.add(e);                    
+                }                
+            }                                 
+        }
+        for(Node e: VisitedNodeList)
+        {
+            System.out.print(e.Label()+"\t");
         }  
         return VisitedNodeList;
     }
     public static void main(String[] args) 
     {     
         Graph g = new Graph();
-        g.AddNode("1"); g.AddNode("2"); g.AddNode("3"); g.AddNode("4");
-        g.AddEdge(g.getNode("1"), g.getNode("2"));
+        g.AddNode("1"); 
+        g.AddNode("2"); 
+        g.AddNode("3"); 
+        g.AddNode("4");        
+        g.AddEdge(g.getNode("1"), g.getNode("2"));        
         g.AddEdge(g.getNode("1"), g.getNode("3"));
         g.AddEdge(g.getNode("2"), g.getNode("4"));
         g.AddEdge(g.getNode("3"), g.getNode("4"));   

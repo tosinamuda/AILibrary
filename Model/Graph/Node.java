@@ -19,11 +19,5 @@ public class Node
     private Point _drawingLocation;
     private Point _center;
     private String _label;
-    private double _diameter;
-    
-    public Node(String label, double diameter, Point location = null))
-    {
-        
-    
-    }
+    private double _diameter;       
 }
