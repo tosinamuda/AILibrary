@@ -24,7 +24,7 @@ public class BreadthFirstSearch
         
     }
     
-    public void BFS(Graph g, Node start, Node goal)
+    public List<Node> BFS(Graph g, Node start, Node goal)
     {
         Node currentNode;
         Queue<Node> searchQueue = new LinkedList<Node>();
@@ -51,7 +51,8 @@ public class BreadthFirstSearch
         for(Node e: VisitedNodeList)
         {
             System.out.println(e.Label()+"\t");
-        }                                        
+        }  
+        return VisitedNodeList;
     }
         
 }
