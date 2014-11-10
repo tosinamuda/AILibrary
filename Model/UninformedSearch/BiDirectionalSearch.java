@@ -53,13 +53,13 @@ public class BiDirectionalSearch
                 current.setVisited(true);
                 visited.add(current);
             }
+            else
+                break;
             for(Node n: g.AdjacencyList2.get(g.getNode(current.Label())))
             {
                 if(!visited.contains(n))
                     if(!queue.contains(n))
                         queue.add(n);
-                if (visited.contains(n))
-                    break outerloop;
             }
         }
         for (int i=0; i< visited.size(); i++)
@@ -71,15 +71,29 @@ public class BiDirectionalSearch
     public static void main (String[] args)
     {
         Graph g = new Graph(); 
-        g.AddNode("1"); g.AddNode("2"); g.AddNode("3"); g.AddNode("4");
+        g.AddNode("1"); g.AddNode("2"); g.AddNode("3"); g.AddNode("4"); g.AddNode("5");
+        g.AddNode("6"); g.AddNode("7"); g.AddNode("8"); g.AddNode("9"); g.AddNode("10");
+        g.AddNode("11"); g.AddNode("12"); g.AddNode("13"); g.AddNode("14"); //g.AddNode("5");
         g.AddEdge(g.getNode("1"), g.getNode("2"));
         g.AddEdge(g.getNode("1"), g.getNode("3"));
-        g.AddEdge(g.getNode("2"), g.getNode("4"));
-        g.AddEdge(g.getNode("3"), g.getNode("4"));
+        g.AddEdge(g.getNode("3"), g.getNode("6"));
+        g.AddEdge(g.getNode("2") , g.getNode("4"));
+        g.AddEdge(g.getNode("2") , g.getNode("5"));
+        g.AddEdge(g.getNode("4"), g.getNode("7"));
+        g.AddEdge(g.getNode("5"), g.getNode("8"));
+        g.AddEdge(g.getNode("6"), g.getNode("8"));
+        g.AddEdge(g.getNode("7"), g.getNode("9"));
+        g.AddEdge(g.getNode("8"), g.getNode("10"));
+        g.AddEdge(g.getNode("8"), g.getNode("11"));
+        g.AddEdge(g.getNode("9"), g.getNode("12"));
+        g.AddEdge(g.getNode("10"), g.getNode("12"));
+        g.AddEdge(g.getNode("11"), g.getNode("13"));
+        g.AddEdge(g.getNode("12"), g.getNode("14"));
+        g.AddEdge(g.getNode("13"), g.getNode("14"));
         String graphString = g.toString();
         BiDirectionalSearch bd = new BiDirectionalSearch(g);
         System.out.println(graphString);
-        bd.BIDI( g.getNode("1"), g.getNode("4"));
+        bd.BIDI( g.getNode("1"), g.getNode("14"));
     }
     
 }
