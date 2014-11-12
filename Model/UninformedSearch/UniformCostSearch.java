@@ -67,9 +67,6 @@ public class UniformCostSearch
                     }
                 }
             }
-        }
-        
-        
-        
+        }                        
     }
 }
