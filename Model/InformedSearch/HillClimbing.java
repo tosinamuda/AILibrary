@@ -79,7 +79,7 @@ public class HillClimbing
 
     public static void main(String[] args)
     {
-        HillClimbing hc = new HillClimbing(0, 0.01);
+        HillClimbing hc = new HillClimbing(0, 0.005);
         System.out.println(hc.Search());
 //        double[] neigh = hc.neighbours();
 //        for(double i: neigh)
