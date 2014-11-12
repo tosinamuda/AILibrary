@@ -95,7 +95,7 @@ public class UniformCostSearch
         g.AddEdge(g.getNode("1"), g.getNode("4"),2);
         g.AddEdge(g.getNode("3"), g.getNode("5"),7);
         g.AddEdge(g.getNode("2") , g.getNode("5"),1);
-        g.AddEdge(g.getNode("4") , g.getNode("5"),3);
+        g.AddEdge(g.getNode("4") , g.getNode("5"),6);
         String graphString = g.toString();
         UniformCostSearch bd = new UniformCostSearch(g);
         System.out.println(graphString);
