@@ -260,11 +260,7 @@ public class TowersOH
         visited.clear();
         t.usingDFS(initial, goal, visited);
         System.out.println();
-//        List<Node> make = t.children(initial);
-//        for (Node node: make)
-//        {
-//            t.printResult(node);
-//        }
+
     }
     
 }
