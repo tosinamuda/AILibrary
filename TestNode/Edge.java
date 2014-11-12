@@ -20,7 +20,10 @@ public class Edge implements Comparable<Object>
     private Node _v1;
     private Node _v2;
     public double _weight; 
-    public Edge parent =null;
+    public Edge parent = null;
+    private boolean isVisited;
+
+
     
     public Edge(Node v1 , Node v2, double weight)
     {
@@ -72,6 +75,13 @@ public class Edge implements Comparable<Object>
         
     }
      
+         public boolean isIsVisited() {
+        return isVisited;
+    }
+
+    public void setIsVisited(boolean isVisited) {
+        this.isVisited = isVisited;
+    }
  
     protected void paintComponent(Graphics g) {
         //g.drawLine(1, 2, 2, 1);
