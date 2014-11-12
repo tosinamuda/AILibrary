@@ -23,6 +23,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Depth-First Search (DFS)"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDFSActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDLS">
               <Properties>
@@ -49,6 +52,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Bidirectional Search (BID)"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemBIDActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUCS">
               <Properties>
@@ -74,6 +80,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Hill Climbing"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemHillClimbingActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSimulatedAnnealing">
               <Properties>
@@ -101,6 +110,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Single Layer Perceptron"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemPerceptronActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>

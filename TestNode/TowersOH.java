@@ -133,7 +133,7 @@ public class TowersOH
         if (now.equals(goal))
         {
             printResult(now);
-            printResult(visit);
+            //printResult(visit);
         }
     }
     
@@ -174,7 +174,7 @@ public class TowersOH
         if (now.equals(goal))
         {
             printResult(now);
-            printResult(visit);
+           // printResult(visit);
         }
     }
     
@@ -249,22 +249,17 @@ public class TowersOH
        
     public static void main(String args[])
     {
-        //Set visited = new HashSet();
         List visited = new ArrayList();
         Node n = new Node();
-        Node initial = n.towerConfig(3, 3, false);
-        Node goal = n.towerConfig(3, 3, true);
+        Node initial = n.towerConfig(3, 4, false);
+        Node goal = n.towerConfig(3, 4, true);
         TowersOH t = new TowersOH();
         t.usingBFS(initial, goal, visited);
         System.out.println();
         visited.clear();
         t.usingDFS(initial, goal, visited);
         System.out.println();
-//        List<Node> make = t.children(initial);
-//        for (Node node: make)
-//        {
-//            t.printResult(node);
-//        }
+
     }
     
 }

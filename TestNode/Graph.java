@@ -10,10 +10,10 @@ package TestNode;
  *
  * @author BaldEagle
  */
-import javax.swing.*;
-import java.awt.*;
 import java.util.*;
-public class Graph 
+import java.io.*;
+
+public class Graph implements Cloneable
 {
     //Okoro's    
     //End of Okoro's
@@ -22,12 +22,14 @@ public class Graph
     public static int countNode = 1;
     
     
-    public final HashMap<Node,java.util.List<Node>> AdjacencyList2 = new HashMap<Node,java.util.List<Node>>();
-      
+   public final TreeMap<Node,java.util.List<Node>> AdjacencyList2 = new TreeMap<Node,java.util.List<Node>>();
+    
     public Graph()
     {
         
-    }        
+    }
+    
+    
     public void AddNode(String Label)
     {       
         Node n = new Node(Label);                
@@ -47,7 +49,59 @@ public class Graph
     }
     
     
-    private boolean check(Node a, HashMap v)
+    public double[][] readDistances(String file)
+    {
+        BufferedReader br = null; 
+        String[][] cities = new String[ListofNodes.size()][ListofNodes.size()];
+        double[][] distance = new double[ListofNodes.size()][ListofNodes.size()];
+        
+        
+        for (double[] i: distance)
+            for (double j: i)
+                j=0.0;
+        
+        
+        try
+        {
+            br= new BufferedReader(new FileReader(file));
+            for (int i=0; i<ListofNodes.size(); i++)
+            {
+                cities[i] = br.readLine().split("\\s+");
+                
+            }
+            br.close();
+            for (int i=0; i< cities.length; i++)
+            {
+                for (int j=0; j< cities.length; j++)
+                {
+                    if (i!= j)
+                    {
+                        distance[i][j] = (Double.parseDouble(cities[i][j]));
+                    }
+                }
+            }
+        }
+        catch(FileNotFoundException f){f.printStackTrace();}
+        catch(IOException e){e.printStackTrace();}
+        
+        return distance;
+    }
+        
+    public void getEdges(double[][] distance)
+    {
+        for (int i=0; i< distance.length; i++)
+        {
+            for(int j=0; j< distance.length; j++)
+            {
+                if (i!= j)
+                {
+                    AddEdge(getNode(String.valueOf(i+1)), getNode(String.valueOf(j+1)), distance[i][j]);
+                }
+            }
+        }
+    }
+    
+    private boolean check(Node a, TreeMap v)
     {
         Iterator it = v.keySet().iterator();
         while (it.hasNext())
@@ -87,7 +141,7 @@ public class Graph
         if(check(from, AdjacencyList2) && check(to, AdjacencyList2))
         {  
             AdjacencyList2.get(from).add(to);
-            AdjacencyList2.get(to).add(from);
+            //AdjacencyList2.get(to).add(from);
            ListofEdges.add(e);                               
         }
         else
@@ -95,6 +149,12 @@ public class Graph
             System.out.println("You cannot add an edge between nodes that are not in the graph");
         }
         
+    }
+    
+    @Override
+    public Graph clone() throws CloneNotSupportedException
+    {
+        return (Graph)super.clone();
     }
     
     public Node getNode(String value)
@@ -116,11 +176,44 @@ public class Graph
      return n;
     }
     
+//    public Node[] getOrder(Graph g)
+//    {
+//        java.util.List<Node> ar = new ArrayList<Node>();
+//        java.util.List<Node> go = new ArrayList<Node>();
+//        
+//        Node n = g.AdjacencyList2.firstKey();
+//        ar.add(n);
+//        int x = g.AdjacencyList2.keySet().size();
+//        for (int i=0; i< x; i++)
+//        {
+//            go = g.AdjacencyList2.get(n);
+//            for (Node no: go)
+//            {
+//                if(!ar.contains(no))
+//                {
+//                    ar.add(no);
+//                    n = no;
+//                    break;
+//                }
+//            }
+//            
+//        }
+//        
+//        Node[] nn = new Node[ar.size()];
+//        for (int i=0; i< ar.size(); i++)
+//        {
+//            nn[i] = (Node)ar.get(i);
+//            System.out.println(nn[i].Label());
+//        }
+//        return nn;
+//    }
+//    
     public Edge getEdge(Node v1, Node v2)
     {
         for(Edge e: ListofEdges)
         {
-            if (e.thisNode().equals(v1) && e.otherNode(v1).equals(v2))
+            if (e.thisNode().equals(v1) && e.otherNode(v1).equals(v2) || 
+                    e.thisNode().equals(v2) && e.otherNode(v2).equals(v1))
                 return e;
         }
         return null;
@@ -146,16 +239,19 @@ public class Graph
         return graph;
     }
     
-//    public static void main(String[] args)
-//    {
-//        Graph g = new Graph();
-//        g.AddNode("1"); g.AddNode("2"); g.AddNode("3"); g.AddNode("4");
-//        g.AddEdge(g.getNode("1"), g.getNode("2"));
-//        g.AddEdge(g.getNode("1"), g.getNode("3"));
-//        g.AddEdge(g.getNode("2"), g.getNode("4"));
-//        g.AddEdge(g.getNode("3"), g.getNode("4"));
-//        String graphString = g.toString();
-//        System.out.println(graphString);
-//    }
+    public static void main(String[] args)
+    {
+        Graph g = new Graph();
+        g.AddNode("1"); g.AddNode("2");g.AddNode("3");
+        g.AddNode("4");g.AddNode("5");g.AddNode("6");
+        g.AddNode("7");g.AddNode("8");g.AddNode("9");
+        g.AddNode("10");g.AddNode("11");
+        g.AddNode("12");g.AddNode("13");g.AddNode("14");
+        g.AddNode("15");
+        System.out.println(g.toString());
+        g.getEdges(g.readDistances("C:\\Users\\olivia\\Documents\\weights.txt"));
+        
+        System.out.println(g.toString());
+    }
 //    
 }

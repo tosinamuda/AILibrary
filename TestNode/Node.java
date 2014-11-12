@@ -109,11 +109,11 @@ public class Node implements Comparable<Object>
             return 0;
     }
        
-     public void drawCircle(Graphics g)
-     {         
-        int diameter = (int)this._diameter;
-        if(this.isVisited())
-        {
+     public void drawCircle(Graphics2D g)
+     {
+         
+          int diameter = (int)this._diameter;
+         if(this.isVisited()){
             g.setColor(Color.green);
             g.fillOval((int)this._drawingLocation.getX(), (int)this._drawingLocation.getY(), diameter, diameter);
             g.setColor(Color.red);
@@ -128,9 +128,9 @@ public class Node implements Comparable<Object>
         }                 
      }   
     
-    protected void paintComponent(Graphics g) 
-    {
-         drawCircle(g);
+     protected void paintComponent(Graphics g) {
+         Graphics2D g2 =(Graphics2D)g;
+         drawCircle(g2);
     }   
 
     /**

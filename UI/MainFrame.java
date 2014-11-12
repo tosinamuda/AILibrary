@@ -4,6 +4,8 @@
  */
 package UI;
 
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 import javax.swing.SwingUtilities;
 
 /**
@@ -64,6 +66,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuUninformedSearch.setText("Uninformed Search");
 
         jMenuItemDFS.setText("Depth-First Search (DFS)");
+        jMenuItemDFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDFSActionPerformed(evt);
+            }
+        });
         jMenuUninformedSearch.add(jMenuItemDFS);
 
         jMenuItemDLS.setText("Depth-Limited Search (DLS)");
@@ -86,6 +93,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuUninformedSearch.add(jMenuItemBFS);
 
         jMenuItemBID.setText("Bidirectional Search (BID)");
+        jMenuItemBID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBIDActionPerformed(evt);
+            }
+        });
         jMenuUninformedSearch.add(jMenuItemBID);
 
         jMenuItemUCS.setText("Uniform-Cost Search(UCS)");
@@ -104,6 +116,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuInformedSearch.add(jMenuItemBestFirstSearch);
 
         jMenuItemHillClimbing.setText("Hill Climbing");
+        jMenuItemHillClimbing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHillClimbingActionPerformed(evt);
+            }
+        });
         jMenuInformedSearch.add(jMenuItemHillClimbing);
 
         jMenuItemSimulatedAnnealing.setText("Simulated Annealing");
@@ -119,6 +136,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuSupervizedANN.setText("Supervized ANN");
 
         jMenuItemPerceptron.setText("Single Layer Perceptron");
+        jMenuItemPerceptron.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPerceptronActionPerformed(evt);
+            }
+        });
         jMenuSupervizedANN.add(jMenuItemPerceptron);
 
         jMenuANN.add(jMenuSupervizedANN);
@@ -162,15 +184,50 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItemIDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIDSActionPerformed
         // TODO add your handling code here:
+          this.setContentPane(new BFSVisualize());
+        this.repaint();
+        this.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItemIDSActionPerformed
 
     private void jMenuItemBFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBFSActionPerformed
         // TODO add your handling code here:
+        this.setContentPane(new BFSVisualize());
+        this.repaint();
+        this.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItemBFSActionPerformed
 
     private void jMenuItemUCSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUCSActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemUCSActionPerformed
+
+    private void jMenuItemHillClimbingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHillClimbingActionPerformed
+        // TODO add your handling code here:
+        this.setContentPane(new HillClimbingUI());
+        this.repaint();
+        this.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jMenuItemHillClimbingActionPerformed
+
+    private void jMenuItemPerceptronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPerceptronActionPerformed
+        // TODO add your handling code here:
+        this.setContentPane(new SingleLayerPerceptronUI());
+        this.repaint();
+        this.setVisible(rootPaneCheckingEnabled);
+        
+    }//GEN-LAST:event_jMenuItemPerceptronActionPerformed
+
+    private void jMenuItemDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDFSActionPerformed
+        // TODO add your handling code here:
+        this.setContentPane(new DFSVisualize());
+        this.repaint();
+        this.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jMenuItemDFSActionPerformed
+
+    private void jMenuItemBIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBIDActionPerformed
+        // TODO add your handling code here:
+        this.setContentPane(new BIDIVisualize());
+        this.repaint();
+        this.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jMenuItemBIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,7 +265,10 @@ public class MainFrame extends javax.swing.JFrame {
                 @Override
                 public void run() {
                  MainFrame mainframe  = new MainFrame();
-                 mainframe.setContentPane(new DrawNode());
+                 mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                 mainframe.setContentPane(new BFSVisualize());
+                 mainframe.setLocation(500,0);
+                 mainframe.setSize(700,700);
                  mainframe.setVisible(true);
                  
                 }

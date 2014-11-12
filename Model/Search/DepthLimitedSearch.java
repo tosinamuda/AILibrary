@@ -4,19 +4,20 @@
  * and open the template in the editor.
  */
 
-package Model.UninformedSearch;
+package Model.Search;
 
 /**
  *
  * @author BaldEagle
  */
 
+
 import TestNode.*;
 import static java.lang.System.out;
 import java.util.*;
-public class DepthLimitedSearch
+public class DepthLimitedSearch extends UninformedSearch
 {
-    public Graph _g;
+    
     private int limit;
 
     public int getLimit() {
@@ -29,10 +30,18 @@ public class DepthLimitedSearch
     
     public DepthLimitedSearch(Graph g)
     {
-       this._g = g; 
+        super(g);
+        
     }
     
-    public List<Node> DLS(Node start, int Limit)
+      public DepthLimitedSearch(Graph g, int limit)
+    {
+        super(g);
+        this.limit = limit;
+    }
+    
+    @Override
+    public List<Node> Search(Node start)
     {
         Node currentNode = start;
         int depth;
@@ -48,9 +57,9 @@ public class DepthLimitedSearch
             depth = depthStack.pop();            
             out.println("Depth\t" + depth + "\tNode\t" + currentNode.Label());
            
-            if(depth < Limit)
+            if(depth < limit)
             {
-                for(Node e  : this._g.AdjacencyList2.get(currentNode))
+                for(Node e  : this.g.AdjacencyList2.get(currentNode))
                 {
                     if(!(VisitedNodeList.contains(e)) && !(searchStack.contains(e)))
                     {
@@ -68,7 +77,7 @@ public class DepthLimitedSearch
         
     }
     
-    public List<Node> DLS( Node start, Node goal, int limit)
+    public List<Node> DLS( Node start, Node goal)
     {
         Node currentNode = start;
         int depth;
@@ -90,7 +99,7 @@ public class DepthLimitedSearch
             }
             if(depth < limit)
             {
-                for(Node e  : this._g.AdjacencyList2.get(currentNode))
+                for(Node e  : this.g.AdjacencyList2.get(currentNode))
                 {
                     if(!(VisitedNodeList.contains(e)) && !(searchStack.contains(e)))
                     {
@@ -115,8 +124,20 @@ public class DepthLimitedSearch
         g.AddEdge(g.getNode("1"), g.getNode("3"));
         g.AddEdge(g.getNode("2"), g.getNode("4"));
         g.AddEdge(g.getNode("3"), g.getNode("4"));   
-        DepthLimitedSearch bfs = new DepthLimitedSearch(g);
-        List<Node> lst = bfs.DLS( g.getNode("1"), g.getNode("4"), 1) ; 
+        DepthLimitedSearch bfs = new DepthLimitedSearch(g,1);
+        List<Node> lst = bfs.DLS( g.getNode("1"), g.getNode("4")) ; 
+    }
+
+    @Override
+    public List<Node> Search() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  
+
+    @Override
+    public List<Node> Search(Node start, Node goal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
