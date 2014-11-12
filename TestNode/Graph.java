@@ -15,63 +15,37 @@ import java.awt.*;
 import java.util.*;
 public class Graph 
 {
+    //Okoro's    
+    //End of Okoro's
     public final java.util.List<Edge> ListofEdges = new ArrayList<Edge>();
     public final java.util.List<Node> ListofNodes = new ArrayList<Node>();
     public static int countNode = 1;
     
     
-   public final HashMap<Node,java.util.List<Node>> AdjacencyList2 = new HashMap<Node,java.util.List<Node>>();
-    
+    public final HashMap<Node,java.util.List<Node>> AdjacencyList2 = new HashMap<Node,java.util.List<Node>>();
+      
     public Graph()
     {
         
-    }
-    
-//    public void AddNode(String Label)
-//    {
-//        Node n = new Node(Label);
-//        AdjacencyList2.put(n.Label(), new ArrayList<Node>());        
-//    }
-    
+    }        
     public void AddNode(String Label)
-    {
-       
-        Node n = new Node(Label);
+    {       
+        Node n = new Node(Label);                
         ListofNodes.add(n);
         AdjacencyList2.put(n, new ArrayList<Node>());   
-        countNode++;
+        countNode++;            
+
     }
     
     public void AddNode(Node newNode)
     {
-        
+                
         ListofNodes.add(newNode);
         AdjacencyList2.put(newNode,  new ArrayList<Node>());
-        countNode++;
+        countNode++;        
+        
     }
     
-//    public void AddEdge(String to, String from)
-//    {
-//        Node v1 = new Node(to);
-//        Node v2 = new Node(from);
-//        Edge e = new Edge(v1,v2);
-//        if(AdjacencyList.containsKey(v1.Label()) && AdjacencyList.containsKey(v2.Label()))
-//        {  
-//            AdjacencyList2.get(v1.Label()).add(v2);
-//            AdjacencyList2.get(v2.Label()).add(v1);
-//            ListofEdges.add(e);
-//            
-////           java.util.List<Node> v1V = (java.util.List)AdjacencyList2.get(v1.Label());
-////           java.util.List<Node> v2V = (java.util.List)AdjacencyList2.get(v2.Label());
-////           v1V.add(v2);
-////           v2V.add(v1);
-////           ListofEdges.add(e);                               
-//        }
-//        else
-//        {
-//            System.out.println("You cannot add an edge between nodes that are not in the graph");
-//        }
-//    }
     
     private boolean check(Node a, HashMap v)
     {
@@ -104,25 +78,6 @@ public class Graph
         }
     }
     
-//    public void AddEdge(String to, String from, double weight)
-//    {
-//        Node v1 = new Node(to);
-//        Node v2 = new Node(from);
-//        Edge e = new Edge(v1,v2,weight);
-//        if(AdjacencyList.containsKey(v1.Label()) && AdjacencyList.containsKey(v2.Label()))
-//        {  
-//           java.util.List<Node> v1V = (java.util.List)AdjacencyList2.get(v1.Label());
-//           java.util.List<Node> v2V = (java.util.List)AdjacencyList2.get(v2.Label());
-//           v1V.add(v2);
-//           v2V.add(v1);
-//           ListofEdges.add(e);                               
-//        }
-//        else
-//        {
-//            System.out.println("You cannot add an edge between nodes that are not in the graph");
-//        }
-//        
-//    }
        
     public void AddEdge(Node from, Node to, double weight)
     {

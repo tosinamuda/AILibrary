@@ -21,17 +21,19 @@ public class Node implements Comparable<Object>
     private String _label;
     private double _diameter;
     private boolean _visited;
-
-    private int weight;
+       
     
     
 
     /**
      * Constructor
+     * @param Label
+     * @param cost
      * @param label
      * @param diameter
      * @param location
      */
+        
     public Node(String label, double diameter, Point location)
     {
         this._drawingLocation = location;
@@ -39,7 +41,7 @@ public class Node implements Comparable<Object>
         this._diameter = diameter;
     }
     
-     public Node(String label, double diameter)
+    public Node(String label, double diameter)
     {
       
         this._label = label;  
@@ -53,6 +55,7 @@ public class Node implements Comparable<Object>
         this._diameter = 20;
     }
     
+    
     /**
      * Properties
      * @return 
@@ -61,7 +64,7 @@ public class Node implements Comparable<Object>
     {
         return this._diameter;
     }
-    
+        
     public String Label()
     {
         return this._label;        
@@ -91,11 +94,11 @@ public class Node implements Comparable<Object>
         this._diameter = _diameter;
     }
     
-    
-    
+      
      
     @Override
-    public int compareTo(Object o) throws ArithmeticException {
+    public int compareTo(Object o) throws ArithmeticException 
+    {
         Node node = (Node)o;
         
         if (Integer.parseInt(this._label) > Integer.parseInt(node.Label()))
@@ -104,33 +107,29 @@ public class Node implements Comparable<Object>
             return -1;
         else 
             return 0;
-        }
+    }
        
      public void drawCircle(Graphics g)
-     {
-         
-          int diameter = (int)this._diameter;
-         if(this.isVisited()){
+     {         
+        int diameter = (int)this._diameter;
+        if(this.isVisited())
+        {
             g.setColor(Color.green);
             g.fillOval((int)this._drawingLocation.getX(), (int)this._drawingLocation.getY(), diameter, diameter);
             g.setColor(Color.red);
             g.drawString(this._label, (int)this.Center().getX() - 5, (int)this.Center().getY()+ 5);
-         }
-         
-         else
-         {
-             
-          g.setColor(Color.black);
-        g.fillOval((int)this._drawingLocation.getX(), (int)this._drawingLocation.getY(), diameter, diameter);
-       g.setColor(Color.red);
-        g.drawString(this._label, (int)this.Center().getX() - 5, (int)this.Center().getY()+ 5);
-             
-         }
-         
-        
+        }       
+        else
+        {             
+            g.setColor(Color.black);
+            g.fillOval((int)this._drawingLocation.getX(), (int)this._drawingLocation.getY(), diameter, diameter);
+            g.setColor(Color.red);
+            g.drawString(this._label, (int)this.Center().getX() - 5, (int)this.Center().getY()+ 5);             
+        }                 
      }   
     
-     protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) 
+    {
          drawCircle(g);
     }   
 
@@ -148,9 +147,5 @@ public class Node implements Comparable<Object>
     public void setVisited(boolean _visited)
     {
         this._visited = _visited;
-    }
-
-    /**
-     * @return the _visited
-     */    
+    }   
 }

@@ -60,16 +60,16 @@ public class Edge implements Comparable<Object>
     
     
     
-     public int compareTo(Object o) {
+        
+    public int compareTo(Object o) 
+    {
         Edge e = (Edge)o;
         if (this._weight > e.getWeight())
             return 1;
         else if (this._weight < e.getWeight())
             return -1;
         else 
-            return 0;
-        
-        
+            return 0;                
     }
      
  
