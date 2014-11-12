@@ -106,7 +106,7 @@ public class Node implements Comparable<Object>
             return 0;
         }
        
-     public void drawCircle(Graphics g)
+     public void drawCircle(Graphics2D g)
      {
          
           int diameter = (int)this._diameter;
@@ -131,7 +131,8 @@ public class Node implements Comparable<Object>
      }   
     
      protected void paintComponent(Graphics g) {
-         drawCircle(g);
+         Graphics2D g2 =(Graphics2D)g;
+         drawCircle(g2);
     }   
 
     /**

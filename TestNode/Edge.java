@@ -77,7 +77,7 @@ public class Edge implements Comparable<Object>
         //g.drawLine(1, 2, 2, 1);
     }
     
-    public void drawEdge(Graphics g)
+    public void drawEdge(Graphics2D g)
     {
         g.setColor(Color.black);
         g.drawLine((int)this._v1.Center().getX(), (int)this._v1.Center().getY(), (int)this._v2.Center().getX(), (int)this._v2.Center().getY());

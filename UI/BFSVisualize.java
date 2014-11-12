@@ -6,18 +6,18 @@
 package UI;
 
 import Model.Search.Search;
-import Model.UninformedSearch.DepthFirstSearch;
+
 import TestNode.Edge;
 import TestNode.Graph;
 import TestNode.Node;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.swing.JDialog;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
@@ -26,15 +26,13 @@ import javax.swing.SwingWorker;
  *
  * @author tosinamuda
  */
-public class DrawNode extends javax.swing.JPanel {
+public class BFSVisualize extends javax.swing.JPanel {
 
     /**
      * Creates new form DrawNode
      */
-    public DrawNode() {
+    public BFSVisualize() {
         initComponents();
-        nodes = new ArrayList<Node>();
-        edges = new ArrayList<Edge>();
         graph = new Graph();
     }
 
@@ -47,12 +45,14 @@ public class DrawNode extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelNodeB = new javax.swing.JLabel();
-        jLabelNodeA = new javax.swing.JLabel();
-        jTextFieldNodeB = new javax.swing.JTextField();
-        jTextFieldNodeA = new javax.swing.JTextField();
-        jComboBoxSelectNodeEdgeAction = new javax.swing.JComboBox();
+        jPanelDrawPanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jButtonNodeEdgeAction = new javax.swing.JButton();
+        jComboBoxSelectNodeEdgeAction = new javax.swing.JComboBox();
+        jTextFieldNodeA = new javax.swing.JTextField();
+        jLabelNodeA = new javax.swing.JLabel();
+        jLabelNodeB = new javax.swing.JLabel();
+        jTextFieldNodeB = new javax.swing.JTextField();
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -63,9 +63,32 @@ public class DrawNode extends javax.swing.JPanel {
             }
         });
 
-        jLabelNodeB.setText("Node 2");
+        jPanelDrawPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jPanelDrawPanel.setToolTipText("Click to draw a Node");
+        jPanelDrawPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanelDrawPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelDrawPanelMouseClicked(evt);
+            }
+        });
 
-        jLabelNodeA.setText("Node 1");
+        javax.swing.GroupLayout jPanelDrawPanelLayout = new javax.swing.GroupLayout(jPanelDrawPanel);
+        jPanelDrawPanel.setLayout(jPanelDrawPanelLayout);
+        jPanelDrawPanelLayout.setHorizontalGroup(
+            jPanelDrawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 683, Short.MAX_VALUE)
+        );
+        jPanelDrawPanelLayout.setVerticalGroup(
+            jPanelDrawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 332, Short.MAX_VALUE)
+        );
+
+        jButtonNodeEdgeAction.setText("Enter");
+        jButtonNodeEdgeAction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNodeEdgeActionActionPerformed(evt);
+            }
+        });
 
         jComboBoxSelectNodeEdgeAction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Add Edge", "Delete Edge", "Delete Node", "Select Start and Goal Node" }));
         jComboBoxSelectNodeEdgeAction.addItemListener(new java.awt.event.ItemListener() {
@@ -79,46 +102,80 @@ public class DrawNode extends javax.swing.JPanel {
             }
         });
 
-        jButtonNodeEdgeAction.setText("Enter");
-        jButtonNodeEdgeAction.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNodeEdgeActionActionPerformed(evt);
+        jTextFieldNodeA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldNodeAKeyPressed(evt);
             }
         });
+
+        jLabelNodeA.setText("Node 1");
+
+        jLabelNodeB.setText("Node 2");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(jLabelNodeB)
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonNodeEdgeAction)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNodeA)
+                    .addComponent(jLabelNodeB))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jButtonNodeEdgeAction)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonNodeEdgeAction)
-                    .addComponent(jLabelNodeB)
-                    .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(86, 86, 86))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelDrawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(341, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNodeB)
-                    .addComponent(jLabelNodeA))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jButtonNodeEdgeAction)
-                .addGap(20, 20, 20))
+                .addContainerGap()
+                .addComponent(jPanelDrawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,11 +215,7 @@ public class DrawNode extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
         
-        Node newNode = new Node(String.valueOf(Graph.countNode), 20, evt.getPoint());
-        nodes.add( newNode);
-        graph.ListofNodes.add(newNode);
-        graph.AddNode(newNode);
-        repaint();
+       
     }//GEN-LAST:event_formMouseClicked
 
     private void jButtonNodeEdgeActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNodeEdgeActionActionPerformed
@@ -210,7 +263,7 @@ public class DrawNode extends javax.swing.JPanel {
             else if(selectedIndex == 3)  {
              //TO-DO     do edge and node delete function
                 Search search = new Model.Search.BreadthFirstSearch(this.graph);
-           task = new Task(this.graph, this, node1, search);
+           task = new Task(node1, search);
            task.execute();
            
             }
@@ -238,13 +291,33 @@ public class DrawNode extends javax.swing.JPanel {
        
     }//GEN-LAST:event_jComboBoxSelectNodeEdgeActionItemStateChanged
 
-    protected void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
+    private void jPanelDrawPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelDrawPanelMouseClicked
+        // TODO add your handling code here:
+        Node newNode = new Node(String.valueOf(Graph.countNode), 20, evt.getPoint());
+        graph.ListofNodes.add(newNode);
+        graph.AddNode(newNode);
+        repaint();
+    }//GEN-LAST:event_jPanelDrawPanelMouseClicked
+
+    private void jTextFieldNodeAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNodeAKeyPressed
+        // TODO add your handling code here:
+//        
+//        if(jTextFieldNodeA.getText().isEmpty() || jTextFieldNodeB.getText().isEmpty())
+//        {
+//            JOptionPane.showMessageDialog(this, "One of the Node value is missing --- Please ");
+//        }
+    }//GEN-LAST:event_jTextFieldNodeAKeyPressed
+
+    @Override
+    protected void paintChildren(Graphics g) {
+        super.paintChildren(g);
+        Graphics2D g2 =(Graphics2D)g;
+        
+       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,   RenderingHints.VALUE_ANTIALIAS_ON);
         if (!graph.ListofNodes.isEmpty()){
         for(Node n : graph.ListofNodes)
         {
-            n.drawCircle(g);
+            n.drawCircle(g2);
             
         }
         }
@@ -252,34 +325,34 @@ public class DrawNode extends javax.swing.JPanel {
         if (!graph.ListofEdges.isEmpty()){
         for (Edge e : graph.ListofEdges)
         {
-            e.drawEdge(g);
+            e.drawEdge(g2);
         }                    
         }
     }
     
+        
     public static void main(String [] args)
     {
-        DrawNode drawNode = new DrawNode();
+        BFSVisualize drawNode = new BFSVisualize();
         
         JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(drawNode);
         frame.setSize(200, 400);
-        frame.setVisible(true);
         frame.pack();
+        frame.setVisible(true);
     }
     
     class Task extends SwingWorker<Void, Node> 
     {
-        public Graph g;
-        public DrawNode drawNode;
+        
         public Node startNode;
         public Search search;
         
-        Task(Graph g, DrawNode drawNode, Node startNode, Search search)
+        Task(Node startNode, Search search)
         {
         
-        this.g = g;
-        this.drawNode =  drawNode;
+        
         this.startNode = startNode;
         this.search = search;
         
@@ -293,6 +366,7 @@ public class DrawNode extends javax.swing.JPanel {
         
         
         List<Node> lst = search.Search(startNode) ; 
+       
         Iterator  iterator = lst.iterator();
         for(int i=0; i < lst.size(); i++){
            lst.get(i).setVisited(true);
@@ -305,7 +379,7 @@ public class DrawNode extends javax.swing.JPanel {
     
         @Override
         protected void process(List<Node> nodes) {
-            drawNode.repaint();
+            repaint();
         }
         
     
@@ -316,6 +390,8 @@ public class DrawNode extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBoxSelectNodeEdgeAction;
     private javax.swing.JLabel jLabelNodeA;
     private javax.swing.JLabel jLabelNodeB;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelDrawPanel;
     private javax.swing.JTextField jTextFieldNodeA;
     private javax.swing.JTextField jTextFieldNodeB;
     // End of variables declaration//GEN-END:variables
@@ -323,8 +399,7 @@ public class DrawNode extends javax.swing.JPanel {
     private Node node;
     private Node nodeA;
     private Node nodeB;
-    private List <Node> nodes;
-    private List <Edge> edges;
+ 
     private Graph graph;
      private Task task;
 }

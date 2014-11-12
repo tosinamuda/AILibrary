@@ -21,4 +21,6 @@ public interface Search {
     public List<Node> Search(Node start);
     
     public List<Node> Search( Node start, Node goal);
+    
+    
 }
