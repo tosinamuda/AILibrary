@@ -17,6 +17,7 @@ import java.util.*;
 public class IterativeDeepeningSearch
 {        
     public Graph _g;
+    List<Node> listofTraversed = new ArrayList<>();
     public IterativeDeepeningSearch(Graph g)
     {
         this._g = g;
@@ -37,6 +38,7 @@ public class IterativeDeepeningSearch
         {
             currentNode = searchStack.pop();
             VisitedNodeList.add(currentNode);
+            listofTraversed.add(currentNode);
             currentNode.setVisited(true);
             depth = depthStack.pop();            
             out.println("Depth\t" + depth + "\tNode\t" + currentNode.Label());
