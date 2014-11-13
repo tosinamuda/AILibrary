@@ -20,6 +20,7 @@ public class Population
 {
     int xsomeLength;
     int populationSize;
+    int fitnessSum;
     double crossProbability;
     double mutationProbability;
     List<Chromosome> population;
@@ -31,6 +32,7 @@ public class Population
         this.populationSize = size;
         this.crossProbability = cross_prob;
         this.mutationProbability = mut_prob;
+        this.fitnessSum =0;
         population = new ArrayList<>();
     }
     
@@ -69,7 +71,7 @@ public class Population
     
     public void fitness()
     {
-       int  fitnessSum =0;
+        fitnessSum =0;
         for (Chromosome x: population)
         {
             x.fitness = function(decimal(x));
@@ -88,7 +90,7 @@ public class Population
     {
         for (Chromosome x: population)
         {
-            if (rand.nextDouble() < x.fitnessRatio)
+            if ((Math.random() * fitnessSum) < x.fitnessRatio)
                 return population.indexOf(x);
         }
         return rand.nextInt((population.size()-1 -0)+1) +0;
@@ -102,7 +104,7 @@ public class Population
         Chromosome child1 = new Chromosome(father.length);
         Chromosome child2 = new Chromosome(father.length);
         
-        if(rand.nextDouble() <= crossProbability)
+        if(Math.random() < crossProbability)
         {
             for (int i =0; i< crossingPoint; i++)
                 child1.genes.set(i, father.genes.get(i));
@@ -132,7 +134,7 @@ public class Population
     {
         for (int i=0; i< chrome.length; i++)
         {
-            if (rand.nextDouble() < mutationProbability)
+            if (Math.random() <= mutationProbability)
             {
                 if (chrome.genes.get(i) == false)
                     chrome.genes.set(i, true);
@@ -148,7 +150,7 @@ public class Population
     {
         initialPopulation();
         List<Chromosome> newPopulation = new ArrayList<>();
-        for (int j = 0; j < 100; j++)
+        for (int j = 0; j < 1000; j++)
         {
             fitness();
 //            List<Chromosome> newPopulation = new ArrayList<>();
@@ -182,7 +184,7 @@ public class Population
     
     public static void main(String[] args)
     {
-        Population p = new Population (4, 10, 0.7, 0.001);
+        Population p = new Population (4, 10, 0.7, 0.005);
         System.out.println(p.geneticAlgorithm());
     }
     
