@@ -6,16 +6,17 @@
 
 package TestNode;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+
 /**
  *
  * @author BaldEagle
  */
-import javax.swing.*;
-import java.util.*;
-import java.awt.*;
-
-public class Node implements Comparable<Object>
+public class BestFirstNode2 implements Comparable<BestFirstNode2>
 {
+    public double heuristic;
     private Point _drawingLocation;
     private Point _center;
     private String _label;
@@ -34,25 +35,31 @@ public class Node implements Comparable<Object>
      * @param location
      */
         
-    public Node(String label, double diameter, Point location)
+    public BestFirstNode2(String label, double diameter, Point location)
     {
         this._drawingLocation = location;
         this._label = label;  
         this._diameter = diameter;
     }
     
-    public Node(String label, double diameter)
+    public BestFirstNode2(String label, double diameter)
     {
       
         this._label = label;  
         this._diameter = diameter;
     }
     
-    public Node(String label)
+    public BestFirstNode2(String label)
     {
         this._label = label;
         this._drawingLocation = new Point(0,0);
         this._diameter = 20;
+    }
+    
+    public BestFirstNode2(double heu, String label)
+    {
+        this._label = label;
+        this.heuristic = heu;
     }
     
     
@@ -97,23 +104,23 @@ public class Node implements Comparable<Object>
       
      
     @Override
-    public int compareTo(Object o) throws ArithmeticException 
+    public int compareTo(BestFirstNode2 o) throws ArithmeticException 
     {
-        Node node = (Node)o;
+        BestFirstNode2 node = (BestFirstNode2)o;
         
-        if (Integer.parseInt(this._label) > Integer.parseInt(node.Label()))
+       if (this.heuristic > node.heuristic)
             return 1;
-        else if (Integer.parseInt(this._label) < Integer.parseInt(node.Label()))
+        else if (this.heuristic < node.heuristic)
             return -1;
         else 
             return 0;
     }
        
-     public void drawCircle(Graphics2D g)
-     {
-         
-          int diameter = (int)this._diameter;
-         if(this.isVisited()){
+     public void drawCircle(Graphics g)
+     {         
+        int diameter = (int)this._diameter;
+        if(this.isVisited())
+        {
             g.setColor(Color.green);
             g.fillOval((int)this._drawingLocation.getX(), (int)this._drawingLocation.getY(), diameter, diameter);
             g.setColor(Color.red);
@@ -128,9 +135,9 @@ public class Node implements Comparable<Object>
         }                 
      }   
     
-     protected void paintComponent(Graphics g) {
-         Graphics2D g2 =(Graphics2D)g;
-         drawCircle(g2);
+    protected void paintComponent(Graphics g) 
+    {
+         drawCircle(g);
     }   
 
     /**
@@ -147,5 +154,5 @@ public class Node implements Comparable<Object>
     public void setVisited(boolean _visited)
     {
         this._visited = _visited;
-    }   
+    }     
 }
