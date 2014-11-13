@@ -40,6 +40,8 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItemBFS = new javax.swing.JMenuItem();
         jMenuItemBID = new javax.swing.JMenuItem();
         jMenuItemUCS = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemTowerOfHanoi = new javax.swing.JMenuItem();
         jMenuInformedSearch = new javax.swing.JMenu();
         jMenuItemBestFirstSearch = new javax.swing.JMenuItem();
         jMenuItemHillClimbing = new javax.swing.JMenuItem();
@@ -74,6 +76,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuUninformedSearch.add(jMenuItemDFS);
 
         jMenuItemDLS.setText("Depth-Limited Search (DLS)");
+        jMenuItemDLS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDLSActionPerformed(evt);
+            }
+        });
         jMenuUninformedSearch.add(jMenuItemDLS);
 
         jMenuItemIDS.setText("Iterative Deepening Search (IDS)");
@@ -107,6 +114,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jMenuUninformedSearch.add(jMenuItemUCS);
+        jMenuUninformedSearch.add(jSeparator1);
+
+        jMenuItemTowerOfHanoi.setText("Tower of Hanoi");
+        jMenuUninformedSearch.add(jMenuItemTowerOfHanoi);
 
         jMenuBar1.add(jMenuUninformedSearch);
 
@@ -151,6 +162,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuBar1.add(jMenuANN);
 
         jMenuEvolutionaryComputation.setText("Evolutionary Computation");
+        jMenuEvolutionaryComputation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEvolutionaryComputationActionPerformed(evt);
+            }
+        });
 
         jMenuItemGeneticAlgorithm.setText("Genetic Algorithm");
         jMenuEvolutionaryComputation.add(jMenuItemGeneticAlgorithm);
@@ -184,7 +200,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItemIDSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIDSActionPerformed
         // TODO add your handling code here:
-          this.setContentPane(new BFSVisualize());
+        this.setContentPane(new IDSVisualize());
         this.repaint();
         this.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItemIDSActionPerformed
@@ -198,6 +214,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItemUCSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUCSActionPerformed
         // TODO add your handling code here:
+        this.setContentPane(new UCSVisualize());
+        this.repaint();
+        this.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItemUCSActionPerformed
 
     private void jMenuItemHillClimbingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHillClimbingActionPerformed
@@ -228,6 +247,20 @@ public class MainFrame extends javax.swing.JFrame {
         this.repaint();
         this.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItemBIDActionPerformed
+
+    private void jMenuItemDLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDLSActionPerformed
+        // TODO add your handling code here:
+         this.setContentPane(new DLSVisualize());
+        this.repaint();
+        this.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jMenuItemDLSActionPerformed
+
+    private void jMenuEvolutionaryComputationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEvolutionaryComputationActionPerformed
+        // TODO add your handling code here:
+            this.setContentPane(new GeneticAlgorithm());
+        this.repaint();
+        this.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jMenuEvolutionaryComputationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,7 +299,7 @@ public class MainFrame extends javax.swing.JFrame {
                 public void run() {
                  MainFrame mainframe  = new MainFrame();
                  mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                 mainframe.setContentPane(new BFSVisualize());
+                 mainframe.setContentPane(new LandingPanel());
                  mainframe.setLocation(500,0);
                  mainframe.setSize(700,700);
                  mainframe.setVisible(true);
@@ -294,6 +327,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemIDS;
     private javax.swing.JMenuItem jMenuItemPerceptron;
     private javax.swing.JMenuItem jMenuItemSimulatedAnnealing;
+    private javax.swing.JMenuItem jMenuItemTowerOfHanoi;
     private javax.swing.JMenuItem jMenuItemUCS;
     private javax.swing.JMenu jMenuMachineLearning;
     private javax.swing.JMenu jMenuSupervizedANN;
@@ -301,5 +335,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuUninformedSearch;
     private javax.swing.JMenu jMenuUnsupervizedANN;
     private javax.swing.JMenu jMenuWindow;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

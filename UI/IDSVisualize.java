@@ -8,6 +8,7 @@ package UI;
 
 
 import Model.Search.Search;
+import Model.UninformedSearch.IterativeDeepeningSearch;
 
 import TestNode.Edge;
 import TestNode.Graph;
@@ -28,12 +29,12 @@ import javax.swing.SwingWorker;
  *
  * @author tosinamuda
  */
-public class BIDIVisualize extends javax.swing.JPanel {
+public class IDSVisualize extends javax.swing.JPanel {
 
     /**
      * Creates new form DrawNode
      */
-    public BIDIVisualize() {
+    public IDSVisualize() {
         initComponents();
         graph = new Graph();
     }
@@ -112,25 +113,18 @@ public class BIDIVisualize extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jLabelNodeB)
-                        .addGap(42, 42, 42))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonNodeEdgeAction, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                    .addComponent(jLabelNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -141,10 +135,9 @@ public class BIDIVisualize extends javax.swing.JPanel {
                     .addComponent(jLabelNodeA)
                     .addComponent(jLabelNodeB))
                 .addGap(11, 11, 11)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jButtonNodeEdgeAction)
@@ -249,7 +242,7 @@ public class BIDIVisualize extends javax.swing.JPanel {
             
             else if(selectedIndex == 3)  {
              //TO-DO     do edge and node delete function
-           Search search = new Model.Search.BiDirectionalSearch(this.graph);
+           IterativeDeepeningSearch search = new IterativeDeepeningSearch(this.graph);
            task = new Task(node1,node2, search);
            task.execute();
            
@@ -324,7 +317,7 @@ public class BIDIVisualize extends javax.swing.JPanel {
         
     public static void main(String [] args)
     {
-        BIDIVisualize drawNode = new BIDIVisualize();
+        IDSVisualize drawNode = new IDSVisualize();
         
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -339,9 +332,9 @@ public class BIDIVisualize extends javax.swing.JPanel {
   
         public Node startNode;
         public Node endNode;
-        public Search search;
+        public IterativeDeepeningSearch search;
         
-        Task(Node startNode, Node endNode, Search search)
+        Task(Node startNode, Node endNode, IterativeDeepeningSearch search)
         {
         
        
@@ -358,9 +351,9 @@ public class BIDIVisualize extends javax.swing.JPanel {
             
         
         
-        List<Node> lst = search.Search(startNode, endNode) ; 
-       
-        Iterator  iterator = lst.iterator();
+        search.IDS(startNode, endNode) ; 
+       List <Node> lst  = search.listofTraversed;
+        Iterator  iterator = search.listofTraversed.iterator();
         for(int i=0; i < lst.size(); i++){
            lst.get(i).setVisited(true);
             Thread.sleep(1000);

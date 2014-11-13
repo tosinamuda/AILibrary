@@ -5,6 +5,7 @@
  */
 package Model.Search;
 
+import TestNode.Edge;
 import TestNode.Graph;
 import TestNode.Node;
 import java.util.List;
@@ -21,6 +22,7 @@ public interface Search {
     public List<Node> Search(Node start);
     
     public List<Node> Search( Node start, Node goal);
+    
     
     
 }

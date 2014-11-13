@@ -15,23 +15,19 @@ import java.util.*;
 import java.awt.*;
 import java.awt.Graphics;
 
-public class Edge implements Comparable<Object>
+public class Edge 
 {
     private Node _v1;
+
+   
     private Node _v2;
-    public double _weight; 
+   
     public Edge parent = null;
     private boolean isVisited;
 
 
     
-    public Edge(Node v1 , Node v2, double weight)
-    {
-        this._v1 = v1;
-        this._v2 = v2;
-        this._weight = weight;
-        
-    }
+   
     public Edge(Node v1, Node v2)
     {
         this._v1 = v1;
@@ -56,26 +52,29 @@ public class Edge implements Comparable<Object>
             return this._v1;
     }
 
-    public double getWeight()
-    {
-        return this._weight;
+     public Node getV1() {
+        return _v1;
     }
+
+    public void setV1(Node _v1) {
+        this._v1 = _v1;
+    }
+
+    public Node getV2() {
+        return _v2;
+    }
+
+    public void setV2(Node _v2) {
+        this._v2 = _v2;
+    }
+  
     
     
     
         
-    public int compareTo(Object o) 
-    {
-        Edge e = (Edge)o;
-        if (this._weight > e.getWeight())
-            return 1;
-        else if (this._weight < e.getWeight())
-            return -1;
-        else 
-            return 0;                
-    }
+ 
      
-         public boolean isIsVisited() {
+         public boolean getIsVisited() {
         return isVisited;
     }
 

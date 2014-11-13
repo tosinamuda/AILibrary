@@ -137,7 +137,7 @@ public class Graph implements Cloneable
     {
         from = getNode(from.Label());
         to = getNode(to.Label());
-        Edge e = new Edge(from, to,weight);
+        Edge e = new WeightedEdge(from, to,weight);
         if(check(from, AdjacencyList2) && check(to, AdjacencyList2))
         {  
             AdjacencyList2.get(from).add(to);

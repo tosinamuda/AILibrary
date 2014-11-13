@@ -8,10 +8,12 @@ package UI;
 
 
 import Model.Search.Search;
+import Model.Search.UniformCostSearch;
 
 import TestNode.Edge;
 import TestNode.Graph;
 import TestNode.Node;
+import TestNode.WeightedEdge;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -28,12 +30,12 @@ import javax.swing.SwingWorker;
  *
  * @author tosinamuda
  */
-public class BIDIVisualize extends javax.swing.JPanel {
+public class UCSVisualize extends javax.swing.JPanel {
 
     /**
      * Creates new form DrawNode
      */
-    public BIDIVisualize() {
+    public UCSVisualize() {
         initComponents();
         graph = new Graph();
     }
@@ -55,6 +57,8 @@ public class BIDIVisualize extends javax.swing.JPanel {
         jLabelNodeA = new javax.swing.JLabel();
         jLabelNodeB = new javax.swing.JLabel();
         jTextFieldNodeB = new javax.swing.JTextField();
+        jLabelWeight = new javax.swing.JLabel();
+        jTextFieldWeight = new javax.swing.JTextField();
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -65,7 +69,9 @@ public class BIDIVisualize extends javax.swing.JPanel {
             }
         });
 
+        jPanelDrawPanel.setBackground(new java.awt.Color(255, 153, 51));
         jPanelDrawPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jPanelDrawPanel.setForeground(new java.awt.Color(0, 102, 255));
         jPanelDrawPanel.setToolTipText("Click to draw a Node");
         jPanelDrawPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanelDrawPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -85,6 +91,8 @@ public class BIDIVisualize extends javax.swing.JPanel {
             .addGap(0, 332, Short.MAX_VALUE)
         );
 
+        jButtonNodeEdgeAction.setBackground(new java.awt.Color(102, 153, 255));
+        jButtonNodeEdgeAction.setForeground(new java.awt.Color(102, 102, 102));
         jButtonNodeEdgeAction.setText("Enter");
         jButtonNodeEdgeAction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,33 +112,33 @@ public class BIDIVisualize extends javax.swing.JPanel {
             }
         });
 
+        jLabelNodeA.setLabelFor(jTextFieldNodeA);
         jLabelNodeA.setText("Node 1");
 
         jLabelNodeB.setText("Node 2");
+
+        jLabelWeight.setText("Weight");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jLabelNodeB)
-                        .addGap(42, 42, 42))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNodeB))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonNodeEdgeAction, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                    .addComponent(jLabelWeight)
+                    .addComponent(jTextFieldWeight))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -139,16 +147,16 @@ public class BIDIVisualize extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNodeA)
-                    .addComponent(jLabelNodeB))
+                    .addComponent(jLabelNodeB)
+                    .addComponent(jLabelWeight))
                 .addGap(11, 11, 11)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(jButtonNodeEdgeAction)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jButtonNodeEdgeAction))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -181,11 +189,13 @@ public class BIDIVisualize extends javax.swing.JPanel {
         // TODO add your handling code here:
         javax.swing.JComboBox cb = (javax.swing.JComboBox)evt.getSource();
        int index = cb.getSelectedIndex();
-     System.out.println(index);
+     
        if(index == 2)
        {
            jLabelNodeB.setVisible(false);
            jTextFieldNodeB.setVisible(false);
+           jLabelWeight.setVisible(false);
+           jTextFieldWeight.setVisible(false);
        }
        
        else if(index == 3)
@@ -195,7 +205,8 @@ public class BIDIVisualize extends javax.swing.JPanel {
            jLabelNodeB.setVisible(true);
            jTextFieldNodeA.setVisible(true);
            jTextFieldNodeB.setVisible(true);
-           
+           jLabelWeight.setVisible(false);
+           jTextFieldWeight.setVisible(false);
           
        }
        else 
@@ -204,6 +215,8 @@ public class BIDIVisualize extends javax.swing.JPanel {
            jLabelNodeB.setText("Node 2");
            jLabelNodeB.setVisible(true);
            jTextFieldNodeB.setVisible(true);
+           jLabelWeight.setVisible(true);
+           jTextFieldWeight.setVisible(true);
        }
            
      
@@ -225,18 +238,30 @@ public class BIDIVisualize extends javax.swing.JPanel {
         if(selectedIndex  == 0 || selectedIndex == 1 || selectedIndex == 3 ){
             String node2Value = jTextFieldNodeB.getText();
              Node node2  = findNode(node2Value);
-            if (node1 == null || node2 == null)
+            if (node1 == null || node2 == null )
             {
                 JOptionPane.showMessageDialog(this, "One of the Nodes does not exist...Please Enter The Right Node");
 
             }
 
             else if(selectedIndex == 0)  {
+                
+               
+               if (jTextFieldWeight.getText().isEmpty() )
+            {
+                JOptionPane.showMessageDialog(this, "Wrong Entry...Please Try Again");
 
-           
-            graph.ListofEdges.add(new Edge(node1, node2));
-            graph.AddEdge(node1, node2);
-            repaint();
+            }
+               else
+               {
+                    double weight = Double.parseDouble(jTextFieldWeight.getText());
+                    graph.ListofEdges.add(new WeightedEdge(node1, node2,weight));
+                    graph.AddEdge(node1, node2, weight);
+                   repaint();
+               }
+            
+            
+            
             }
             
             else if(selectedIndex == 1)  {
@@ -249,7 +274,8 @@ public class BIDIVisualize extends javax.swing.JPanel {
             
             else if(selectedIndex == 3)  {
              //TO-DO     do edge and node delete function
-           Search search = new Model.Search.BiDirectionalSearch(this.graph);
+             
+           UniformCostSearch search = new Model.Search.UniformCostSearch(this.graph);
            task = new Task(node1,node2, search);
            task.execute();
            
@@ -269,6 +295,7 @@ public class BIDIVisualize extends javax.swing.JPanel {
          
               
         }
+        
     }//GEN-LAST:event_jButtonNodeEdgeActionActionPerformed
 
     private Node findNode(String nodeValue)
@@ -324,7 +351,7 @@ public class BIDIVisualize extends javax.swing.JPanel {
         
     public static void main(String [] args)
     {
-        BIDIVisualize drawNode = new BIDIVisualize();
+        UCSVisualize drawNode = new UCSVisualize();
         
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -334,14 +361,14 @@ public class BIDIVisualize extends javax.swing.JPanel {
         frame.setVisible(true);
     }
     
-    class Task extends SwingWorker<Void, Node> 
+    class Task extends SwingWorker<Void, Edge> 
     {
   
         public Node startNode;
         public Node endNode;
-        public Search search;
+        public UniformCostSearch search;
         
-        Task(Node startNode, Node endNode, Search search)
+        Task(Node startNode, Node endNode, UniformCostSearch search)
         {
         
        
@@ -358,20 +385,21 @@ public class BIDIVisualize extends javax.swing.JPanel {
             
         
         
-        List<Node> lst = search.Search(startNode, endNode) ; 
+        List<Edge> lst = search.UCS(startNode, endNode) ; 
+        
        
         Iterator  iterator = lst.iterator();
         for(int i=0; i < lst.size(); i++){
-           lst.get(i).setVisited(true);
-            Thread.sleep(1000);
-        publish(lst.get(i));
+           lst.get(i).setIsVisited(true);
+            Thread.sleep(2000);
+            publish(lst.get(i));
         
         }
             return  null;
         }
     
         @Override
-        protected void process(List<Node> nodes) {
+        protected void process(List<Edge> edges) {
             repaint();
         }
         
@@ -383,10 +411,12 @@ public class BIDIVisualize extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBoxSelectNodeEdgeAction;
     private javax.swing.JLabel jLabelNodeA;
     private javax.swing.JLabel jLabelNodeB;
+    private javax.swing.JLabel jLabelWeight;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelDrawPanel;
     private javax.swing.JTextField jTextFieldNodeA;
     private javax.swing.JTextField jTextFieldNodeB;
+    private javax.swing.JTextField jTextFieldWeight;
     // End of variables declaration//GEN-END:variables
     
     private Node node;

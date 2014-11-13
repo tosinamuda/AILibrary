@@ -17,14 +17,14 @@ import java.util.*;
 public class IterativeDeepeningSearch
 {        
     public Graph _g;
-    List<Node> listofTraversed = new ArrayList<>();
+    public List<Node> listofTraversed = new ArrayList<>();
     public IterativeDeepeningSearch(Graph g)
     {
         this._g = g;
         
     }    
     
-    public int DLS(Node start, Node goal, int limit)
+    private int DLS(Node start, Node goal, int limit)
     {
         Node currentNode = start;
         int depth;
@@ -39,7 +39,7 @@ public class IterativeDeepeningSearch
             currentNode = searchStack.pop();
             VisitedNodeList.add(currentNode);
             listofTraversed.add(currentNode);
-            currentNode.setVisited(true);
+            //currentNode.setVisited(true);
             depth = depthStack.pop();            
             out.println("Depth\t" + depth + "\tNode\t" + currentNode.Label());
             if(currentNode == goal)            
@@ -71,7 +71,7 @@ public class IterativeDeepeningSearch
     {
         int status;
         int depth;
-        depth = 0;
+        depth = 1;
         while(true)
         {
             status = this.DLS(start, goal, depth);

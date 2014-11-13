@@ -4,23 +4,24 @@
  * and open the template in the editor.
  */
 
-package Model.UninformedSearch;
+package Model.Search;
 
 /**
  *
  * @author olivia
  */
 
+
 import TestNode.*;
 import java.util.*;
 
-public class UniformCostSearch 
+public class UniformCostSearch extends UninformedSearch
 {
-    Graph g;
+ 
     
     public UniformCostSearch(Graph g)
     {
-        this.g = g;
+       super(g);
     }
     
     public Comparator <WeightedEdge> co = new Comparator<WeightedEdge>()
@@ -101,6 +102,21 @@ public class UniformCostSearch
         UniformCostSearch bd = new UniformCostSearch(g);
         System.out.println(graphString);
         bd.UCS( g.getNode("1"), g.getNode("5"));
+    }
+
+    @Override
+    public List<Node> Search() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Node> Search(Node start) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Node> Search(Node start, Node goal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
