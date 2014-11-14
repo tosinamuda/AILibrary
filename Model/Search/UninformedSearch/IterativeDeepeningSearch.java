@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 
-package Model.UninformedSearch;
+package Model.Search.UninformedSearch;
 
 /**
  *
  * @author BaldEagle
  */
 //import Model.graphapi.*;
-import TestNode.*;
+import Model.Graph.Graph;
+import Model.Graph.Node;
 import static java.lang.System.out;
 import java.util.*;
 public class IterativeDeepeningSearch
@@ -49,7 +50,7 @@ public class IterativeDeepeningSearch
             }
             if(depth < limit)
             {
-                for(Node e  : this._g.AdjacencyList2.get(currentNode))
+                for(Node e  : this._g.AdjacencyList.get(currentNode))
                 {
                     if(!(VisitedNodeList.contains(e)) && !(searchStack.contains(e)))
                     {

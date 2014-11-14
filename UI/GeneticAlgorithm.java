@@ -5,6 +5,8 @@
  */
 package UI;
 
+import Model.GeneticAlgorithm.Population;
+
 /**
  *
  * @author tosinamuda
@@ -28,7 +30,7 @@ public class GeneticAlgorithm extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabelGeneSize = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldGeneSize = new javax.swing.JTextField();
         jLabelPopulationSize = new javax.swing.JLabel();
         jTextFieldPopulationSize = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -38,11 +40,12 @@ public class GeneticAlgorithm extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaResult = new javax.swing.JTextArea();
         jLabelResult = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jLabelGeneSize.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelGeneSize.setText("Gene Size");
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldGeneSize.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabelPopulationSize.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelPopulationSize.setText("Population Size");
@@ -66,30 +69,38 @@ public class GeneticAlgorithm extends javax.swing.JPanel {
         jLabelResult.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelResult.setText("Result");
 
+        jButton1.setText("Enter");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldPopulationSize)
-                    .addComponent(jTextFieldCrossoverProbability)
-                    .addComponent(jTextFieldMutationProbability)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelMutationProbability)
-                            .addComponent(jLabelGeneSize, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelPopulationSize, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE))
-                .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelResult)
                 .addGap(27, 27, 27))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldGeneSize, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldPopulationSize)
+                    .addComponent(jTextFieldCrossoverProbability)
+                    .addComponent(jTextFieldMutationProbability)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addComponent(jLabelMutationProbability)
+                            .addComponent(jLabelGeneSize, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelPopulationSize, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +108,7 @@ public class GeneticAlgorithm extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(jLabelGeneSize)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldGeneSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabelPopulationSize, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -110,7 +121,9 @@ public class GeneticAlgorithm extends javax.swing.JPanel {
                 .addComponent(jLabelMutationProbability)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldMutationProbability, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelResult)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,8 +131,19 @@ public class GeneticAlgorithm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int geneSize = Integer.parseInt(jTextFieldGeneSize.getText());
+        int popSize = Integer.parseInt(jTextFieldPopulationSize.getText());
+        double crossProb = Double.parseDouble(jTextFieldCrossoverProbability.getText());
+        double mutProb = Double.parseDouble(jTextFieldMutationProbability.getText());
+        Population p = new Population (geneSize, popSize, crossProb, mutProb);
+        jTextAreaResult.setText(String.valueOf(p.geneticAlgorithm()));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelGeneSize;
     private javax.swing.JLabel jLabelMutationProbability;
@@ -127,8 +151,8 @@ public class GeneticAlgorithm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelResult;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaResult;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldCrossoverProbability;
+    private javax.swing.JTextField jTextFieldGeneSize;
     private javax.swing.JTextField jTextFieldMutationProbability;
     private javax.swing.JTextField jTextFieldPopulationSize;
     // End of variables declaration//GEN-END:variables

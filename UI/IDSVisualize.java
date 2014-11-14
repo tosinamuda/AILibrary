@@ -8,11 +8,11 @@ package UI;
 
 
 import Model.Search.Search;
-import Model.UninformedSearch.IterativeDeepeningSearch;
+import Model.Search.UninformedSearch.IterativeDeepeningSearch;
 
-import TestNode.Edge;
-import TestNode.Graph;
-import TestNode.Node;
+import Model.Graph.Edge;
+import Model.Graph.Graph;
+import Model.Graph.Node;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;

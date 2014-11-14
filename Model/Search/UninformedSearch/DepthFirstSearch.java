@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.Search;
+package Model.Search.UninformedSearch;
 
-import TestNode.Graph;
-import TestNode.Node;
+import Model.Graph.Graph;
+import Model.Graph.Node;
 import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class DepthFirstSearch  extends UninformedSearch{
              * if they have not been visited and they are not on the stack         
              * Add push them to the stack             
             **/
-            for(Node e : this.g.AdjacencyList2.get(currentNode))
+            for(Node e : this.g.AdjacencyList.get(currentNode))
             {
                 if(!(VisitedNodeList.contains(e) && !(searchStack.contains(e))))
                 {
@@ -98,7 +98,7 @@ public class DepthFirstSearch  extends UninformedSearch{
              * if they have not been visited and they are not on the stack         
              * Add push them to the stack             
             **/
-            for(Node e : this.g.AdjacencyList2.get(currentNode))
+            for(Node e : this.g.AdjacencyList.get(currentNode))
             {
                 if(!(VisitedNodeList.contains(e) && !(searchStack.contains(e))))
                 {

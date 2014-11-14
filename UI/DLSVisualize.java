@@ -6,10 +6,10 @@
 package UI;
 
 import Model.Search.Search;
-import TestNode.Edge;
-import TestNode.Graph;
-import TestNode.Node;
-import TestNode.WeightedEdge;
+import Model.Graph.Edge;
+import Model.Graph.Graph;
+import Model.Graph.Node;
+import Model.Graph.WeightedEdge;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -275,7 +275,7 @@ public class DLSVisualize extends javax.swing.JPanel {
                else
                {
                     int limit = Integer.parseInt(jTextFieldLimit.getText());
-                   Search search = new Model.Search.DepthLimitedSearch(this.graph, limit);
+                   Search search = new Model.Search.UninformedSearch.DepthLimitedSearch(this.graph, limit);
                    
            task = new Task(node1, search);
            task.execute();

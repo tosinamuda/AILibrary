@@ -1,19 +1,15 @@
-package UI;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+package UI;
 
 import Model.Search.Search;
-import Model.Search.UninformedSearch.UniformCostSearch;
 
 import Model.Graph.Edge;
 import Model.Graph.Graph;
 import Model.Graph.Node;
-import Model.Graph.WeightedEdge;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -21,6 +17,7 @@ import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JFileChooser;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -30,12 +27,12 @@ import javax.swing.SwingWorker;
  *
  * @author tosinamuda
  */
-public class UCSVisualize extends javax.swing.JPanel {
+public class SimulatedAnnealingVisualize extends javax.swing.JPanel {
 
     /**
      * Creates new form DrawNode
      */
-    public UCSVisualize() {
+    public SimulatedAnnealingVisualize() {
         initComponents();
         graph = new Graph();
     }
@@ -57,8 +54,6 @@ public class UCSVisualize extends javax.swing.JPanel {
         jLabelNodeA = new javax.swing.JLabel();
         jLabelNodeB = new javax.swing.JLabel();
         jTextFieldNodeB = new javax.swing.JTextField();
-        jLabelWeight = new javax.swing.JLabel();
-        jTextFieldWeight = new javax.swing.JTextField();
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -69,9 +64,7 @@ public class UCSVisualize extends javax.swing.JPanel {
             }
         });
 
-        jPanelDrawPanel.setBackground(new java.awt.Color(255, 153, 51));
         jPanelDrawPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
-        jPanelDrawPanel.setForeground(new java.awt.Color(0, 102, 255));
         jPanelDrawPanel.setToolTipText("Click to draw a Node");
         jPanelDrawPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanelDrawPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,11 +81,9 @@ public class UCSVisualize extends javax.swing.JPanel {
         );
         jPanelDrawPanelLayout.setVerticalGroup(
             jPanelDrawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 332, Short.MAX_VALUE)
+            .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        jButtonNodeEdgeAction.setBackground(new java.awt.Color(102, 153, 255));
-        jButtonNodeEdgeAction.setForeground(new java.awt.Color(102, 102, 102));
         jButtonNodeEdgeAction.setText("Enter");
         jButtonNodeEdgeAction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +91,7 @@ public class UCSVisualize extends javax.swing.JPanel {
             }
         });
 
-        jComboBoxSelectNodeEdgeAction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Add Edge", "Delete Edge", "Delete Node", "Select Start and Goal Node" }));
+        jComboBoxSelectNodeEdgeAction.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Add Edge", "Delete Edge", "Delete Node", "Choose File" }));
         jComboBoxSelectNodeEdgeAction.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxSelectNodeEdgeActionItemStateChanged(evt);
@@ -112,33 +103,42 @@ public class UCSVisualize extends javax.swing.JPanel {
             }
         });
 
-        jLabelNodeA.setLabelFor(jTextFieldNodeA);
+        jTextFieldNodeA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldNodeAKeyPressed(evt);
+            }
+        });
+
         jLabelNodeA.setText("Node 1");
 
         jLabelNodeB.setText("Node 2");
-
-        jLabelWeight.setText("Weight");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNodeB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonNodeEdgeAction, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(jLabelWeight)
-                    .addComponent(jTextFieldWeight))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(jLabelNodeB)
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -147,16 +147,15 @@ public class UCSVisualize extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNodeA)
-                    .addComponent(jLabelNodeB)
-                    .addComponent(jLabelWeight))
+                    .addComponent(jLabelNodeB))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldNodeB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jButtonNodeEdgeAction))
+                    .addComponent(jTextFieldNodeA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxSelectNodeEdgeAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(jButtonNodeEdgeAction)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -176,7 +175,8 @@ public class UCSVisualize extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanelDrawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,43 +184,6 @@ public class UCSVisualize extends javax.swing.JPanel {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_formMousePressed
-
-    private void jComboBoxSelectNodeEdgeActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSelectNodeEdgeActionActionPerformed
-        // TODO add your handling code here:
-        javax.swing.JComboBox cb = (javax.swing.JComboBox)evt.getSource();
-       int index = cb.getSelectedIndex();
-     
-       if(index == 2)
-       {
-           jLabelNodeB.setVisible(false);
-           jTextFieldNodeB.setVisible(false);
-           jLabelWeight.setVisible(false);
-           jTextFieldWeight.setVisible(false);
-       }
-       
-       else if(index == 3)
-       {
-           jLabelNodeA.setText("Start Node");
-           jLabelNodeB.setText("End Node");
-           jLabelNodeB.setVisible(true);
-           jTextFieldNodeA.setVisible(true);
-           jTextFieldNodeB.setVisible(true);
-           jLabelWeight.setVisible(false);
-           jTextFieldWeight.setVisible(false);
-          
-       }
-       else 
-       {
-           jLabelNodeA.setText("Node 1");
-           jLabelNodeB.setText("Node 2");
-           jLabelNodeB.setVisible(true);
-           jTextFieldNodeB.setVisible(true);
-           jLabelWeight.setVisible(true);
-           jTextFieldWeight.setVisible(true);
-       }
-           
-     
-    }//GEN-LAST:event_jComboBoxSelectNodeEdgeActionActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
@@ -235,36 +198,23 @@ public class UCSVisualize extends javax.swing.JPanel {
         
         Node node1  = findNode(node1Value);
        
-        if(selectedIndex  == 0 || selectedIndex == 1 || selectedIndex == 3 ){
+        if(selectedIndex  == 0 || selectedIndex == 1 ){
             String node2Value = jTextFieldNodeB.getText();
              Node node2  = findNode(node2Value);
-            if (node1 == null || node2 == null )
+            if (node1 == null || node2 == null)
             {
                 JOptionPane.showMessageDialog(this, "One of the Nodes does not exist...Please Enter The Right Node");
 
             }
 
             else if(selectedIndex == 0)  {
-                
-               
-               if (jTextFieldWeight.getText().isEmpty() )
-            {
-                JOptionPane.showMessageDialog(this, "Wrong Entry...Please Try Again");
 
+           
+            graph.ListofEdges.add(new Edge(node1, node2));
+            graph.AddEdge(node1, node2);
+            repaint();
             }
-               else
-               {
-                    double weight = Double.parseDouble(jTextFieldWeight.getText());
-                    graph.ListofEdges.add(new WeightedEdge(node1, node2,weight));
-                    graph.AddEdge(node1, node2, weight);
-                   repaint();
-               }
-            
-            
-            
-            }
-            
-            else if(selectedIndex == 1)  {
+              else if(selectedIndex == 1)  {
              //TO-DO     do edge and node delete function
            
             graph.ListofEdges.add(new Edge(node1, node2));
@@ -272,30 +222,26 @@ public class UCSVisualize extends javax.swing.JPanel {
             repaint();
             }
             
-            else if(selectedIndex == 3)  {
-             //TO-DO     do edge and node delete function
-             
-           UniformCostSearch search = new Model.Search.UninformedSearch.UniformCostSearch(this.graph);
-           task = new Task(node1,node2, search);
-           task.execute();
-           
-            }
-            
             
         }
         
         //Option for deleteNode
-        else if (selectedIndex  == 2 ){
+        else if (selectedIndex  == 2 || selectedIndex == 3){
             if (node1 == null )
             {
                 JOptionPane.showMessageDialog(this, "The Node entered  does not exist...Please Enter The Right Node");
 
             }
 
-         
+            else if(selectedIndex == 3)  {
+             //TO-DO     do edge and node delete function
+                Search search = new Model.Search.UninformedSearch.BreadthFirstSearch(this.graph);
+           task = new Task(node1, search);
+           task.execute();
+           
+            }
               
         }
-        
     }//GEN-LAST:event_jButtonNodeEdgeActionActionPerformed
 
     private Node findNode(String nodeValue)
@@ -312,13 +258,6 @@ public class UCSVisualize extends javax.swing.JPanel {
         
     }
     
-    private void jComboBoxSelectNodeEdgeActionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSelectNodeEdgeActionItemStateChanged
-        // TODO add your handling code here:
-        
-       
-       
-    }//GEN-LAST:event_jComboBoxSelectNodeEdgeActionItemStateChanged
-
     private void jPanelDrawPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelDrawPanelMouseClicked
         // TODO add your handling code here:
         Node newNode = new Node(String.valueOf(Graph.countNode), 20, evt.getPoint());
@@ -327,11 +266,51 @@ public class UCSVisualize extends javax.swing.JPanel {
         repaint();
     }//GEN-LAST:event_jPanelDrawPanelMouseClicked
 
+    private void jTextFieldNodeAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNodeAKeyPressed
+        // TODO add your handling code here:
+//        
+//        if(jTextFieldNodeA.getText().isEmpty() || jTextFieldNodeB.getText().isEmpty())
+//        {
+//            JOptionPane.showMessageDialog(this, "One of the Node value is missing --- Please ");
+//        }
+    }//GEN-LAST:event_jTextFieldNodeAKeyPressed
+
+    private void jComboBoxSelectNodeEdgeActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSelectNodeEdgeActionActionPerformed
+        // TODO add your handling code here:
+        javax.swing.JComboBox cb = (javax.swing.JComboBox)evt.getSource();
+        int index = cb.getSelectedIndex();
+        if(index == 2)
+        {
+            jLabelNodeB.setVisible(false);
+            jTextFieldNodeB.setVisible(false);
+        }
+
+        else if(index == 3)
+        {
+            JFileChooser chooser = new JFileChooser();
+           // chooser.accept(null)
+        }
+        else
+        {
+            jLabelNodeA.setText("Node 1");
+            jLabelNodeB.setText("Node 2");
+            jLabelNodeB.setVisible(true);
+            jTextFieldNodeB.setVisible(true);
+        }
+
+    }//GEN-LAST:event_jComboBoxSelectNodeEdgeActionActionPerformed
+
+    private void jComboBoxSelectNodeEdgeActionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSelectNodeEdgeActionItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jComboBoxSelectNodeEdgeActionItemStateChanged
+
     @Override
     protected void paintChildren(Graphics g) {
         super.paintChildren(g);
         Graphics2D g2 =(Graphics2D)g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,   RenderingHints.VALUE_ANTIALIAS_ON);
+        
+       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,   RenderingHints.VALUE_ANTIALIAS_ON);
         if (!graph.ListofNodes.isEmpty()){
         for(Node n : graph.ListofNodes)
         {
@@ -351,7 +330,7 @@ public class UCSVisualize extends javax.swing.JPanel {
         
     public static void main(String [] args)
     {
-        UCSVisualize drawNode = new UCSVisualize();
+        SimulatedAnnealingVisualize drawNode = new SimulatedAnnealingVisualize();
         
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -361,19 +340,17 @@ public class UCSVisualize extends javax.swing.JPanel {
         frame.setVisible(true);
     }
     
-    class Task extends SwingWorker<Void, Edge> 
+    class Task extends SwingWorker<Void, Node> 
     {
-  
-        public Node startNode;
-        public Node endNode;
-        public UniformCostSearch search;
         
-        Task(Node startNode, Node endNode, UniformCostSearch search)
+        public Node startNode;
+        public Search search;
+        
+        Task(Node startNode, Search search)
         {
         
-       
+        
         this.startNode = startNode;
-        this.endNode = endNode;
         this.search = search;
         
                   
@@ -385,21 +362,20 @@ public class UCSVisualize extends javax.swing.JPanel {
             
         
         
-        List<Edge> lst = search.UCS(startNode, endNode) ; 
-        
+        List<Node> lst = search.Search(startNode) ; 
        
         Iterator  iterator = lst.iterator();
         for(int i=0; i < lst.size(); i++){
-           lst.get(i).setIsVisited(true);
-            Thread.sleep(2000);
-            publish(lst.get(i));
+           lst.get(i).setVisited(true);
+            Thread.sleep(1000);
+        publish(lst.get(i));
         
         }
             return  null;
         }
     
         @Override
-        protected void process(List<Edge> edges) {
+        protected void process(List<Node> nodes) {
             repaint();
         }
         
@@ -411,12 +387,10 @@ public class UCSVisualize extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBoxSelectNodeEdgeAction;
     private javax.swing.JLabel jLabelNodeA;
     private javax.swing.JLabel jLabelNodeB;
-    private javax.swing.JLabel jLabelWeight;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelDrawPanel;
     private javax.swing.JTextField jTextFieldNodeA;
     private javax.swing.JTextField jTextFieldNodeB;
-    private javax.swing.JTextField jTextFieldWeight;
     // End of variables declaration//GEN-END:variables
     
     private Node node;

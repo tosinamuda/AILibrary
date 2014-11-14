@@ -5,9 +5,9 @@
  */
 package Model.Search;
 
-import TestNode.Edge;
-import TestNode.Graph;
-import TestNode.Node;
+import Model.Graph.Edge;
+import Model.Graph.Graph;
+import Model.Graph.Node;
 import java.util.List;
 
 /**

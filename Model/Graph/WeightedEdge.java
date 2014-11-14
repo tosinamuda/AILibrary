@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TestNode;
+package Model.Graph;
 
+import Model.Graph.Node;
 import java.awt.Color;
 import java.awt.Graphics2D;
 

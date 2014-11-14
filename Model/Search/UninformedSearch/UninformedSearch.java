@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.Search;
+package Model.Search.UninformedSearch;
 
-import TestNode.Graph;
-import TestNode.Node;
+import Model.Graph.Graph;
+import Model.Graph.Node;
+import Model.Search.Search;
 import java.util.List;
 
 /**

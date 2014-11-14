@@ -5,13 +5,14 @@
  */
 
 
-package Model.InformedSearch;
+package Model.Search.InformedSearch;
 
 /**
  *
  * @author BaldEagle
  */
-import TestNode.*;
+import Model.Graph.BestFirstNode;
+import Model.Graph.BestFirstGraph;
 import java.util.AbstractQueue;
 import java.util.PriorityQueue;
 import java.util.ArrayList;
@@ -31,12 +32,12 @@ public class BestFirstSearch
     }
     
     
-    public List<BestFirstNode2> BestFS(BestFirstNode2 start)
+    public List<BestFirstNode> BestFS(BestFirstNode start)
     {
-        BestFirstNode2 currentNode = start;
-        PriorityQueue<BestFirstNode2> open = new PriorityQueue<>();
-        PriorityQueue<BestFirstNode2> closed = new PriorityQueue<>();
-        List<BestFirstNode2> VisitedNodeList = new ArrayList<>();
+        BestFirstNode currentNode = start;
+        PriorityQueue<BestFirstNode> open = new PriorityQueue<>();
+        PriorityQueue<BestFirstNode> closed = new PriorityQueue<>();
+        List<BestFirstNode> VisitedNodeList = new ArrayList<>();
         open.add(start);
         while(!open.isEmpty())
         {
@@ -48,7 +49,7 @@ public class BestFirstSearch
 //                break;
 //            }
             
-            for(BestFirstNode2 node : this._g.AdjacencyList2.get(currentNode))
+            for(BestFirstNode node : this._g.AdjacencyList2.get(currentNode))
             {
                 if(!open.contains(node) && !closed.contains(node) && !VisitedNodeList.contains(node))
                 {
@@ -56,7 +57,7 @@ public class BestFirstSearch
                 }
             }
         }
-        for(BestFirstNode2 item : VisitedNodeList)
+        for(BestFirstNode item : VisitedNodeList)
         {
             System.out.print(item.Label() + "\t");            
         }
@@ -68,7 +69,8 @@ public class BestFirstSearch
         
         BestFirstGraph g = new BestFirstGraph();
         BestFirstSearch bts = new BestFirstSearch(g);
-        g.AddNode("1",1.2); g.AddNode("2",2.3); g.AddNode("3",3.1); g.AddNode("4",4.4); g.AddNode("5", 5.0); g.AddNode("6", 6.10);
+        g.AddNode("1",1.2); g.AddNode("2",2.3);
+        g.AddNode("3",3.1); g.AddNode("4",4.4); g.AddNode("5", 5.0); g.AddNode("6", 6.10);
         g.AddEdge(g.getNode("1"), g.getNode("3"));
         g.AddEdge(g.getNode("1"), g.getNode("4"));
         g.AddEdge(g.getNode("1"), g.getNode("6"));
@@ -91,7 +93,7 @@ public class BestFirstSearch
         g.AddEdge(g.getNode("6"), g.getNode("1"));
         g.AddEdge(g.getNode("6"), g.getNode("2"));
         
-        List<BestFirstNode2> lst = bts.BestFS(g.getNode("6"));
+        List<BestFirstNode> lst = bts.BestFS(g.getNode("6"));
     }
     
 }

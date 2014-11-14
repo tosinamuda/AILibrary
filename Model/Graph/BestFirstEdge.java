@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package TestNode;
+package Model.Graph;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,19 +15,19 @@ import java.awt.Graphics;
  */
 public class BestFirstEdge implements Comparable<Object>
 {
-    private BestFirstNode2 _v1;
-    private BestFirstNode2 _v2;
+    private BestFirstNode _v1;
+    private BestFirstNode _v2;
     public double _weight; 
     public BestFirstEdge parent =null;
     
-    public BestFirstEdge(BestFirstNode2 v1 , BestFirstNode2 v2, double weight)
+    public BestFirstEdge(BestFirstNode v1 , BestFirstNode v2, double weight)
     {
         this._v1 = v1;
         this._v2 = v2;
         this._weight = weight;
         
     }
-    public BestFirstEdge(BestFirstNode2 v1, BestFirstNode2 v2)
+    public BestFirstEdge(BestFirstNode v1, BestFirstNode v2)
     {
         this._v1 = v1;
         this._v2 = v2;        
@@ -36,14 +36,14 @@ public class BestFirstEdge implements Comparable<Object>
       /**
      * This method returns the start node of an edge
      */
-    public BestFirstNode2 thisNode()
+    public BestFirstNode thisNode()
     {
         return this._v1;
     }
     /**
      * 
      */
-    public BestFirstNode2 otherNode(BestFirstNode2 node)
+    public BestFirstNode otherNode(BestFirstNode node)
     {
         if (node == _v1)
             return this._v2;

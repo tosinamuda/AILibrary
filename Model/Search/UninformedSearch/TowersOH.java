@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package TestNode;
+package Model.Search.UninformedSearch;
 
 /**
  *

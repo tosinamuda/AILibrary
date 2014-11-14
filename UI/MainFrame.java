@@ -169,6 +169,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jMenuItemGeneticAlgorithm.setText("Genetic Algorithm");
+        jMenuItemGeneticAlgorithm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGeneticAlgorithmActionPerformed(evt);
+            }
+        });
         jMenuEvolutionaryComputation.add(jMenuItemGeneticAlgorithm);
 
         jMenuBar1.add(jMenuEvolutionaryComputation);
@@ -257,10 +262,15 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuEvolutionaryComputationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEvolutionaryComputationActionPerformed
         // TODO add your handling code here:
-            this.setContentPane(new GeneticAlgorithm());
+            
+    }//GEN-LAST:event_jMenuEvolutionaryComputationActionPerformed
+
+    private void jMenuItemGeneticAlgorithmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGeneticAlgorithmActionPerformed
+        // TODO add your handling code here:
+        this.setContentPane(new GeneticAlgorithm());
         this.repaint();
         this.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_jMenuEvolutionaryComputationActionPerformed
+    }//GEN-LAST:event_jMenuItemGeneticAlgorithmActionPerformed
 
     /**
      * @param args the command line arguments

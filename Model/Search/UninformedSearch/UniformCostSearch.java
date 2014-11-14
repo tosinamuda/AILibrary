@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Model.Search;
+package Model.Search.UninformedSearch;
 
 /**
  *
@@ -12,7 +12,10 @@ package Model.Search;
  */
 
 
-import TestNode.*;
+import Model.Graph.WeightedEdge;
+import Model.Graph.Graph;
+import Model.Graph.Edge;
+import Model.Graph.Node;
 import java.util.*;
 
 public class UniformCostSearch extends UninformedSearch
@@ -42,7 +45,7 @@ public class UniformCostSearch extends UninformedSearch
         PriorityQueue<WeightedEdge> pq = new PriorityQueue<WeightedEdge>(10, co);
         List<Edge> visited = new ArrayList<Edge>();
         Edge result = null;
-        for (Node n: g.AdjacencyList2.get(g.getNode(start.Label())))
+        for (Node n: g.AdjacencyList.get(g.getNode(start.Label())))
         {
             WeightedEdge e = (WeightedEdge)g.getEdge(start, n);
             pq.add(e);
@@ -58,7 +61,7 @@ public class UniformCostSearch extends UninformedSearch
             }
             else
             {
-                for (Node n: g.AdjacencyList2.get(g.getNode(no.Label())))
+                for (Node n: g.AdjacencyList.get(g.getNode(no.Label())))
                 {
                     if (!n.equals(e.thisNode()))
                     {

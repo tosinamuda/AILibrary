@@ -7,11 +7,11 @@ package UI;
  */
 
 
-import Model.InformedSearch.BestFirstSearch;
+import Model.Search.InformedSearch.BestFirstSearch;
 
-import TestNode.BestFirstEdge;
-import TestNode.BestFirstGraph;
-import TestNode.BestFirstNode2;
+import Model.Graph.BestFirstEdge;
+import Model.Graph.BestFirstGraph;
+import Model.Graph.BestFirstNode;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -220,11 +220,11 @@ public class BestFirstSearchVisualize extends javax.swing.JPanel {
         int selectedIndex = jComboBoxSelectNodeEdgeAction.getSelectedIndex();
         String node1Value  =  jTextFieldNodeA.getText();
         
-        BestFirstNode2 node1  = findNode(node1Value);
+        BestFirstNode node1  = findNode(node1Value);
        
         if(selectedIndex  == 0 || selectedIndex == 1 || selectedIndex == 3 ){
             String node2Value = jTextFieldNodeB.getText();
-             BestFirstNode2 node2  = findNode(node2Value);
+             BestFirstNode node2  = findNode(node2Value);
             if (node1 == null || node2 == null)
             {
                 JOptionPane.showMessageDialog(this, "One of the Nodes does not exist...Please Enter The Right BestFirstNode2");
@@ -262,7 +262,7 @@ public class BestFirstSearchVisualize extends javax.swing.JPanel {
         else if (selectedIndex  == 2 ){
             if (node1 == null )
             {
-                JOptionPane.showMessageDialog(this, "The BestFirstNode2 entered  does not exist...Please Enter The Right BestFirstNode2");
+                JOptionPane.showMessageDialog(this, "The Node entered  does not exist...Please Enter The Right Node");
 
             }
 
@@ -271,10 +271,10 @@ public class BestFirstSearchVisualize extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonNodeEdgeActionActionPerformed
 
-    private BestFirstNode2 findNode(String nodeValue)
+    private BestFirstNode findNode(String nodeValue)
     {
-        BestFirstNode2 foundNode = null;
-        for(BestFirstNode2 n: graph.ListofNodes) 
+        BestFirstNode foundNode = null;
+        for(BestFirstNode n: graph.ListofNodes) 
         {
             if (n.Label().equals(nodeValue) )
             {
@@ -294,7 +294,7 @@ public class BestFirstSearchVisualize extends javax.swing.JPanel {
 
     private void jPanelDrawPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelDrawPanelMouseClicked
         // TODO add your handling code here:
-        BestFirstNode2 newNode = new BestFirstNode2(String.valueOf(BestFirstGraph.countNode), 20, evt.getPoint());
+        BestFirstNode newNode = new BestFirstNode(String.valueOf(BestFirstGraph.countNode), 20, evt.getPoint());
         graph.ListofNodes.add(newNode);
         graph.AddNode(newNode);
         repaint();
@@ -306,7 +306,7 @@ public class BestFirstSearchVisualize extends javax.swing.JPanel {
         Graphics2D g2 =(Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,   RenderingHints.VALUE_ANTIALIAS_ON);
         if (!graph.ListofNodes.isEmpty()){
-        for(BestFirstNode2 n : graph.ListofNodes)
+        for(BestFirstNode n : graph.ListofNodes)
         {
             n.drawCircle(g2);
             
@@ -334,14 +334,14 @@ public class BestFirstSearchVisualize extends javax.swing.JPanel {
         frame.setVisible(true);
     }
     
-    class Task extends SwingWorker<Void, BestFirstNode2> 
+    class Task extends SwingWorker<Void, BestFirstNode> 
     {
   
-        public BestFirstNode2 startNode;
-        public BestFirstNode2 endNode;
+        public BestFirstNode startNode;
+        public BestFirstNode endNode;
         public BestFirstSearch search;
         
-        Task(BestFirstNode2 startNode, BestFirstNode2 endNode, BestFirstSearch search)
+        Task(BestFirstNode startNode, BestFirstNode endNode, BestFirstSearch search)
         {
         
        
@@ -358,7 +358,7 @@ public class BestFirstSearchVisualize extends javax.swing.JPanel {
             
         
         
-        List<BestFirstNode2> lst = search.BestFS(startNode) ; 
+        List<BestFirstNode> lst = search.BestFS(startNode) ; 
        
         Iterator  iterator = lst.iterator();
         for(int i=0; i < lst.size(); i++){
@@ -371,7 +371,7 @@ public class BestFirstSearchVisualize extends javax.swing.JPanel {
         }
     
         @Override
-        protected void process(List<BestFirstNode2> nodes) {
+        protected void process(List<BestFirstNode> nodes) {
             repaint();
         }
         
@@ -389,9 +389,9 @@ public class BestFirstSearchVisualize extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldNodeB;
     // End of variables declaration//GEN-END:variables
     
-    private BestFirstNode2 node;
-    private BestFirstNode2 nodeA;
-    private BestFirstNode2 nodeB;
+    private BestFirstNode node;
+    private BestFirstNode nodeA;
+    private BestFirstNode nodeB;
  
     private BestFirstGraph graph;
      private Task task;

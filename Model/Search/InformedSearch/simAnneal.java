@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 
-package Model.InformedSearch;
+package Model.Search.InformedSearch;
 
 /**
  *
  * @author olivia
  */
-import TestNode.*;
+import Model.Graph.Graph;
+import Model.Graph.Edge;
+import Model.Graph.Node;
 import java.util.*;
 
 public class simAnneal 
@@ -25,7 +27,7 @@ public class simAnneal
     {
         this.g = g;
         currentOrder = new ArrayList<>();
-        Iterator it = g.AdjacencyList2.keySet().iterator();
+        Iterator it = g.AdjacencyList.keySet().iterator();
         while(it.hasNext())
             currentOrder.add((Node) it.next());
         distances = g.readDistances(file);
@@ -133,7 +135,7 @@ public class simAnneal
         g.AddNode("10");g.AddNode("11");
         g.AddNode("12");g.AddNode("13");g.AddNode("14");
         g.AddNode("15");
-        String file = "C:\\Users\\olivia\\Documents\\weights.txt";
+        String file = "C:\\Users\\tosinamuda\\Documents\\NetBeansProjects\\aigroup6\\src\\weights.txt";
         simAnneal sa = new simAnneal(g,file);
         sa.sAnneal();
         

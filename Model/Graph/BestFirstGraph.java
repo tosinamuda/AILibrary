@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package TestNode;
+package Model.Graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,31 +25,31 @@ public class BestFirstGraph
     
    
 //Okoro's
-    BestFirstNode2 root;
+    BestFirstNode root;
     //End of Okoro's
     public final java.util.List<BestFirstEdge> ListofEdges = new ArrayList<BestFirstEdge>();
-    public final java.util.List<BestFirstNode2> ListofNodes = new ArrayList<BestFirstNode2>();
+    public final java.util.List<BestFirstNode> ListofNodes = new ArrayList<BestFirstNode>();
     public static int countNode = 1;
     
     
-    public final HashMap<BestFirstNode2,java.util.List<BestFirstNode2>> AdjacencyList2 = new HashMap<BestFirstNode2,java.util.List<BestFirstNode2>>();
+    public final HashMap<BestFirstNode,java.util.List<BestFirstNode>> AdjacencyList2 = new HashMap<BestFirstNode,java.util.List<BestFirstNode>>();
       
       //Okoro's
     
 //    public void setDepthOfNodes()
 //    {
-//        for(BestFirstNode2 node : ListofNodes)
+//        for(BestFirstNode node : ListofNodes)
 //        {
 //            if(!node.children.isEmpty())
 //            {
-//                for(BestFirstNode2 childNode: node.children)
+//                for(BestFirstNode childNode: node.children)
 //                {
 //                   childNode.depth = node.depth +1; 
 //                }
 //            }
 //        }
 //    }
-    public boolean EdgeExistsWith(BestFirstNode2 theNode , BestFirstNode2 otherNode)
+    public boolean EdgeExistsWith(BestFirstNode theNode , BestFirstNode otherNode)
     {        
         if(getEdge(this.root,otherNode) != null)        
         {
@@ -60,31 +60,31 @@ public class BestFirstGraph
     //End of Okoro's
     public void AddNode(String Label, double heuristic)
     {       
-        BestFirstNode2 n = new BestFirstNode2(Label,heuristic);
+        BestFirstNode n = new BestFirstNode(Label,heuristic);
         if (ListofNodes.isEmpty())
         {
             this.root = n;
             ListofNodes.add(n);
-            AdjacencyList2.put(n, new ArrayList<BestFirstNode2>());   
+            AdjacencyList2.put(n, new ArrayList<BestFirstNode>());   
             countNode++;      
             //this.root.depth = 0;
         }
         else
         {
             ListofNodes.add(n);
-            AdjacencyList2.put(n, new ArrayList<BestFirstNode2>());   
+            AdjacencyList2.put(n, new ArrayList<BestFirstNode>());   
             countNode++;            
         }        
     }
     
-    public void AddNode(BestFirstNode2 newNode)
+    public void AddNode(BestFirstNode newNode)
     {
         //Okoro's
         if (ListofNodes.isEmpty())
         {
             this.root = newNode;
             ListofNodes.add(newNode);
-            AdjacencyList2.put(newNode, new ArrayList<BestFirstNode2>());   
+            AdjacencyList2.put(newNode, new ArrayList<BestFirstNode>());   
             countNode++;      
             //this.root.depth = 0;
         }        
@@ -92,19 +92,19 @@ public class BestFirstGraph
         else
         {
             ListofNodes.add(newNode);
-            AdjacencyList2.put(newNode,  new ArrayList<BestFirstNode2>());
+            AdjacencyList2.put(newNode,  new ArrayList<BestFirstNode>());
             countNode++;
         }
         
     }
     
     
-    private boolean check(BestFirstNode2 a, HashMap v)
+    private boolean check(BestFirstNode a, HashMap v)
     {
         Iterator it = v.keySet().iterator();
         while (it.hasNext())
         {
-            BestFirstNode2 b = (BestFirstNode2) it.next();
+            BestFirstNode b = (BestFirstNode) it.next();
             if (a == b)
             {
                 return true;
@@ -113,7 +113,7 @@ public class BestFirstGraph
         return false;
     }
     
-    public void AddEdge(BestFirstNode2 from, BestFirstNode2 to)
+    public void AddEdge(BestFirstNode from, BestFirstNode to)
     {
         from = getNode(from.Label());
         to = getNode(to.Label());
@@ -132,7 +132,7 @@ public class BestFirstGraph
     }
     
        
-    public void AddEdge(BestFirstNode2 from, BestFirstNode2 to, double weight)
+    public void AddEdge(BestFirstNode from, BestFirstNode to, double weight)
     {
         from = getNode(from.Label());
         to = getNode(to.Label());
@@ -151,14 +151,14 @@ public class BestFirstGraph
         
     }
     
-    public BestFirstNode2 getNode(String value)
+    public BestFirstNode getNode(String value)
     {
      Set keys = AdjacencyList2.keySet();
      Iterator iterator = keys.iterator();
-     BestFirstNode2 n = null;
+     BestFirstNode n = null;
      while(iterator.hasNext())
      {
-        BestFirstNode2  foundNode = (BestFirstNode2)iterator.next();
+        BestFirstNode  foundNode = (BestFirstNode)iterator.next();
          if (foundNode.Label().equals(value) )
          {
              n = foundNode;
@@ -170,7 +170,7 @@ public class BestFirstGraph
      return n;
     }
     
-    public BestFirstEdge getEdge(BestFirstNode2 v1, BestFirstNode2 v2)
+    public BestFirstEdge getEdge(BestFirstNode v1, BestFirstNode v2)
     {
         for(BestFirstEdge e: ListofEdges)
         {
@@ -186,12 +186,12 @@ public class BestFirstGraph
         Iterator it = this.AdjacencyList2.keySet().iterator();
         while(it.hasNext())
         {
-            BestFirstNode2 n = (BestFirstNode2)it.next();
+            BestFirstNode n = (BestFirstNode)it.next();
             graph += "BestFirstNode2 " + n.Label() + ": ";
-            java.util.List <BestFirstNode2> adjacentNode = (java.util.List<BestFirstNode2>)AdjacencyList2.get(this.getNode(n.Label()));
-            for (BestFirstNode2 others : adjacentNode)
+            java.util.List <BestFirstNode> adjacentNode = (java.util.List<BestFirstNode>)AdjacencyList2.get(this.getNode(n.Label()));
+            for (BestFirstNode others : adjacentNode)
             {
-                BestFirstNode2 otherNode = getNode(others.Label());
+                BestFirstNode otherNode = getNode(others.Label());
                 graph += otherNode.Label() + " ";
             }
             graph += "\n";

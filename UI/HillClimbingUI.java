@@ -5,7 +5,7 @@
  */
 package UI;
 
-import Model.InformedSearch.HillClimbing;
+import Model.Search.InformedSearch.HillClimbing;
 import javax.swing.JFrame;
 
 /**

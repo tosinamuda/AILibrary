@@ -4,22 +4,24 @@
  * and open the template in the editor.
  */
 
-package Model.UninformedSearch;
+package Model.Search.UninformedSearch;
 
 /**
  *
  * @author olivia
  */
 
-import TestNode.*;
+
+import Model.Graph.Graph;
+import Model.Graph.Node;
 import java.util.*;
 
-public class BiDirectionalSearch 
+public class BiDirectionalSearch  extends UninformedSearch
 {
-    Graph g;
+   
     public BiDirectionalSearch(Graph g)
     {
-        this.g = g;
+        super(g);
     }
     
     public boolean contain(List m, Node n)
@@ -37,7 +39,8 @@ public class BiDirectionalSearch
         return true;
     }
     
-    public List<Node> BIDI( Node start, Node goal)
+    @Override
+    public List<Node> Search( Node start, Node goal)
     {
         Queue<Node> queue = new LinkedList<Node>();
         List<Node> visited = new ArrayList<Node>();
@@ -50,12 +53,12 @@ public class BiDirectionalSearch
             current = queue.poll();
             if(!visited.contains(current))
             {
-                current.setVisited(true);
+                //current.setVisited(true);
                 visited.add(current);
             }
             else
                 break;
-            for(Node n: g.AdjacencyList2.get(g.getNode(current.Label())))
+            for(Node n: g.AdjacencyList.get(g.getNode(current.Label())))
             {
                 if(!visited.contains(n))
                     if(!queue.contains(n))
@@ -93,7 +96,18 @@ public class BiDirectionalSearch
         String graphString = g.toString();
         BiDirectionalSearch bd = new BiDirectionalSearch(g);
         System.out.println(graphString);
-        bd.BIDI( g.getNode("1"), g.getNode("14"));
+        bd.Search( g.getNode("1"), g.getNode("14"));
     }
+
+    @Override
+    public List<Node> Search() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Node> Search(Node start) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

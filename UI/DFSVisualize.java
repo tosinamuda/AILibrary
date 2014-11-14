@@ -6,14 +6,13 @@
 package UI;
 
 import Model.Search.Search;
-import Model.UninformedSearch.DepthFirstSearch;
-import TestNode.Edge;
-import TestNode.Graph;
-import TestNode.Node;
+
+import Model.Graph.Edge;
+import Model.Graph.Graph;
+import Model.Graph.Node;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
@@ -248,7 +247,7 @@ public class DFSVisualize extends javax.swing.JPanel {
 
             else if(selectedIndex == 3)  {
              //TO-DO     do edge and node delete function
-                Search search = new Model.Search.BreadthFirstSearch(this.graph);
+                Search search = new Model.Search.UninformedSearch.BreadthFirstSearch(this.graph);
            task = new Task(node1, search);
            task.execute();
            
