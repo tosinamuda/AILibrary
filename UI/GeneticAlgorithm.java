@@ -137,7 +137,7 @@ public class GeneticAlgorithm extends javax.swing.JPanel {
         int popSize = Integer.parseInt(jTextFieldPopulationSize.getText());
         double crossProb = Double.parseDouble(jTextFieldCrossoverProbability.getText());
         double mutProb = Double.parseDouble(jTextFieldMutationProbability.getText());
-        Population p = new Population (geneSize, popSize, crossProb, mutProb);
+        Population p = new Population(geneSize, popSize, crossProb, mutProb);
         jTextAreaResult.setText(String.valueOf(p.geneticAlgorithm()));
     }//GEN-LAST:event_jButton1ActionPerformed
 

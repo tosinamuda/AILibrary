@@ -4,6 +4,8 @@
  */
 package UI;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.SwingUtilities;
@@ -19,6 +21,15 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                MainFrame.this.setVisible(false);
+                MainFrame.this.dispose();
+            }
+        });
     }
 
     /**
@@ -236,7 +247,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.setContentPane(new SingleLayerPerceptronUI());
         this.repaint();
         this.setVisible(rootPaneCheckingEnabled);
-        
+
     }//GEN-LAST:event_jMenuItemPerceptronActionPerformed
 
     private void jMenuItemDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDFSActionPerformed
@@ -255,14 +266,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItemDLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDLSActionPerformed
         // TODO add your handling code here:
-         this.setContentPane(new DLSVisualize());
+        this.setContentPane(new DLSVisualize());
         this.repaint();
         this.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItemDLSActionPerformed
 
     private void jMenuEvolutionaryComputationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEvolutionaryComputationActionPerformed
         // TODO add your handling code here:
-            
+
     }//GEN-LAST:event_jMenuEvolutionaryComputationActionPerformed
 
     private void jMenuItemGeneticAlgorithmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGeneticAlgorithmActionPerformed
@@ -279,19 +290,18 @@ public class MainFrame extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-         try {
+        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Nimbus".equals(info.getName())) {
 //                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
 //                    break;
 //                }
 //            }
-           
-      javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-   
-    
+
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -305,20 +315,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                 MainFrame mainframe  = new MainFrame();
-                 mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                 mainframe.setContentPane(new LandingPanel());
-                 mainframe.setLocation(500,0);
-                 mainframe.setSize(700,700);
-                 mainframe.setVisible(true);
-                 
-                }
-               });
+            @Override
+            public void run() {
+                MainFrame mainframe = new MainFrame();
+                mainframe.setContentPane(new LandingPanel());
+                mainframe.setLocation(300, 10);
+                mainframe.setSize(900, 700);
+                mainframe.setVisible(true);
+
+            }
+        });
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

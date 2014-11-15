@@ -7,6 +7,7 @@ package UI;
 
 import Model.Search.InformedSearch.HillClimbing;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -114,24 +115,26 @@ public class HillClimbingUI extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        double stepSize = Double.parseDouble(jTextFieldStepSize.getText());
-        double startingPosition = Double.parseDouble(jTextFieldStartingPosition.getText());
-        HillClimbing hc = new HillClimbing(startingPosition, stepSize);
-        jTextAreaOutput.setText("15x-x^2 is maximum when x = "+String.valueOf(hc.Search()));
-        
+        if (jTextFieldStepSize.getText().isEmpty() || jTextFieldStartingPosition.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Required Field Missing...Please fill all input fields");
+        } else {
+            double stepSize = Double.parseDouble(jTextFieldStepSize.getText());
+            double startingPosition = Double.parseDouble(jTextFieldStartingPosition.getText());
+            HillClimbing hc = new HillClimbing(startingPosition, stepSize);
+            jTextAreaOutput.setText("15x-x^2 is maximum when x = " + String.valueOf(hc.Search()));
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-   public static void main(String [] args)
-    {
+    public static void main(String[] args) {
         HillClimbingUI drawNode = new HillClimbingUI();
-        
+
         JFrame frame = new JFrame();
         frame.add(drawNode);
         frame.setSize(200, 400);
         frame.setVisible(true);
         frame.pack();
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

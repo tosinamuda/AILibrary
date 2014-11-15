@@ -5,9 +5,6 @@ package UI;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-import Model.Search.Search;
 import Model.Search.UninformedSearch.IterativeDeepeningSearch;
 
 import Model.Graph.Edge;
@@ -167,122 +164,97 @@ public class IDSVisualize extends javax.swing.JPanel {
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_formMousePressed
 
     private void jComboBoxSelectNodeEdgeActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSelectNodeEdgeActionActionPerformed
         // TODO add your handling code here:
-        javax.swing.JComboBox cb = (javax.swing.JComboBox)evt.getSource();
-       int index = cb.getSelectedIndex();
-     System.out.println(index);
-       if(index == 2)
-       {
-           jLabelNodeB.setVisible(false);
-           jTextFieldNodeB.setVisible(false);
-       }
-       
-       else if(index == 3)
-       {
-           jLabelNodeA.setText("Start Node");
-           jLabelNodeB.setText("End Node");
-           jLabelNodeB.setVisible(true);
-           jTextFieldNodeA.setVisible(true);
-           jTextFieldNodeB.setVisible(true);
-           
-          
-       }
-       else 
-       {
-           jLabelNodeA.setText("Node 1");
-           jLabelNodeB.setText("Node 2");
-           jLabelNodeB.setVisible(true);
-           jTextFieldNodeB.setVisible(true);
-       }
-           
-     
+        javax.swing.JComboBox cb = (javax.swing.JComboBox) evt.getSource();
+        int index = cb.getSelectedIndex();
+        System.out.println(index);
+        if (index == 2) {
+            jLabelNodeB.setVisible(false);
+            jTextFieldNodeB.setVisible(false);
+        } else if (index == 3) {
+            jLabelNodeA.setText("Start Node");
+            jLabelNodeB.setText("End Node");
+            jLabelNodeB.setVisible(true);
+            jTextFieldNodeA.setVisible(true);
+            jTextFieldNodeB.setVisible(true);
+
+        } else {
+            jLabelNodeA.setText("Node 1");
+            jLabelNodeB.setText("Node 2");
+            jLabelNodeB.setVisible(true);
+            jTextFieldNodeB.setVisible(true);
+        }
+
+
     }//GEN-LAST:event_jComboBoxSelectNodeEdgeActionActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        
-       
+
+
     }//GEN-LAST:event_formMouseClicked
 
     private void jButtonNodeEdgeActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNodeEdgeActionActionPerformed
         // TODO add your handling code here:
         int selectedIndex = jComboBoxSelectNodeEdgeAction.getSelectedIndex();
-        String node1Value  =  jTextFieldNodeA.getText();
-        
-        Node node1  = findNode(node1Value);
-       
-        if(selectedIndex  == 0 || selectedIndex == 1 || selectedIndex == 3 ){
+        String node1Value = jTextFieldNodeA.getText();
+
+        Node node1 = findNode(node1Value);
+
+        if (selectedIndex == 0 || selectedIndex == 1 || selectedIndex == 3) {
             String node2Value = jTextFieldNodeB.getText();
-             Node node2  = findNode(node2Value);
-            if (node1 == null || node2 == null)
-            {
+            Node node2 = findNode(node2Value);
+            if (node1 == null || node2 == null) {
                 JOptionPane.showMessageDialog(this, "One of the Nodes does not exist...Please Enter The Right Node");
 
+            } else if (selectedIndex == 0) {
+
+                graph.ListofEdges.add(new Edge(node1, node2));
+                graph.AddEdge(node1, node2);
+                repaint();
+            } else if (selectedIndex == 1) {
+             //TO-DO     do edge and node delete function
+
+                graph.ListofEdges.add(new Edge(node1, node2));
+                graph.AddEdge(node1, node2);
+                repaint();
+            } else if (selectedIndex == 3) {
+                //TO-DO     do edge and node delete function
+                IterativeDeepeningSearch search = new IterativeDeepeningSearch(this.graph);
+                task = new Task(node1, node2, search);
+                task.execute();
+
             }
 
-            else if(selectedIndex == 0)  {
-
-           
-            graph.ListofEdges.add(new Edge(node1, node2));
-            graph.AddEdge(node1, node2);
-            repaint();
-            }
-            
-            else if(selectedIndex == 1)  {
-             //TO-DO     do edge and node delete function
-           
-            graph.ListofEdges.add(new Edge(node1, node2));
-            graph.AddEdge(node1, node2);
-            repaint();
-            }
-            
-            else if(selectedIndex == 3)  {
-             //TO-DO     do edge and node delete function
-           IterativeDeepeningSearch search = new IterativeDeepeningSearch(this.graph);
-           task = new Task(node1,node2, search);
-           task.execute();
-           
-            }
-            
-            
-        }
-        
-        //Option for deleteNode
-        else if (selectedIndex  == 2 ){
-            if (node1 == null )
-            {
+        } //Option for deleteNode
+        else if (selectedIndex == 2) {
+            if (node1 == null) {
                 JOptionPane.showMessageDialog(this, "The Node entered  does not exist...Please Enter The Right Node");
 
             }
 
-         
-              
         }
     }//GEN-LAST:event_jButtonNodeEdgeActionActionPerformed
 
-    private Node findNode(String nodeValue)
-    {
+    private Node findNode(String nodeValue) {
         Node foundNode = null;
-        for(Node n: graph.ListofNodes) 
-        {
-            if (n.Label().equals(nodeValue) )
-            {
+        for (Node n : graph.ListofNodes) {
+            if (n.Label().equals(nodeValue)) {
                 foundNode = n;
             }
         }
         return foundNode;
-        
+
     }
-    
+
     private void jComboBoxSelectNodeEdgeActionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSelectNodeEdgeActionItemStateChanged
         // TODO add your handling code here:
-        
-       
-       
+
+
     }//GEN-LAST:event_jComboBoxSelectNodeEdgeActionItemStateChanged
 
     private void jPanelDrawPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelDrawPanelMouseClicked
@@ -296,29 +268,25 @@ public class IDSVisualize extends javax.swing.JPanel {
     @Override
     protected void paintChildren(Graphics g) {
         super.paintChildren(g);
-        Graphics2D g2 =(Graphics2D)g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,   RenderingHints.VALUE_ANTIALIAS_ON);
-        if (!graph.ListofNodes.isEmpty()){
-        for(Node n : graph.ListofNodes)
-        {
-            n.drawCircle(g2);
-            
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        if (!graph.ListofNodes.isEmpty()) {
+            for (Node n : graph.ListofNodes) {
+                n.drawCircle(g2);
+
+            }
         }
-        }
-        
-        if (!graph.ListofEdges.isEmpty()){
-        for (Edge e : graph.ListofEdges)
-        {
-            e.drawEdge(g2);
-        }                    
+
+        if (!graph.ListofEdges.isEmpty()) {
+            for (Edge e : graph.ListofEdges) {
+                e.drawEdge(g2);
+            }
         }
     }
-    
-        
-    public static void main(String [] args)
-    {
+
+    public static void main(String[] args) {
         IDSVisualize drawNode = new IDSVisualize();
-        
+
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(drawNode);
@@ -326,49 +294,41 @@ public class IDSVisualize extends javax.swing.JPanel {
         frame.pack();
         frame.setVisible(true);
     }
-    
-    class Task extends SwingWorker<Void, Node> 
-    {
-  
+
+    class Task extends SwingWorker<Void, Node> {
+
         public Node startNode;
         public Node endNode;
         public IterativeDeepeningSearch search;
-        
-        Task(Node startNode, Node endNode, IterativeDeepeningSearch search)
-        {
-        
-       
-        this.startNode = startNode;
-        this.endNode = endNode;
-        this.search = search;
-        
-                  
-            
+
+        Task(Node startNode, Node endNode, IterativeDeepeningSearch search) {
+
+            this.startNode = startNode;
+            this.endNode = endNode;
+            this.search = search;
+
         }
 
         @Override
-        protected Void doInBackground() throws InterruptedException{
-            
-        
-        
-        search.IDS(startNode, endNode) ; 
-       List <Node> lst  = search.listofTraversed;
-        Iterator  iterator = search.listofTraversed.iterator();
-        for(int i=0; i < lst.size(); i++){
-           lst.get(i).setVisited(true);
-            Thread.sleep(1000);
-        publish(lst.get(i));
-        
+        protected Void doInBackground() throws InterruptedException {
+
+            search.IDS(startNode, endNode);
+            List<Node> lst = search.listofTraversed;
+            Iterator iterator = search.listofTraversed.iterator();
+            for (int i = 0; i < lst.size(); i++) {
+                lst.get(i).setVisited(true);
+                Thread.sleep(1000);
+                publish(lst.get(i));
+
+            }
+            return null;
         }
-            return  null;
-        }
-    
+
         @Override
         protected void process(List<Node> nodes) {
             repaint();
         }
-        
-    
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -381,11 +341,11 @@ public class IDSVisualize extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldNodeA;
     private javax.swing.JTextField jTextFieldNodeB;
     // End of variables declaration//GEN-END:variables
-    
+
     private Node node;
     private Node nodeA;
     private Node nodeB;
- 
+
     private Graph graph;
-     private Task task;
+    private Task task;
 }
